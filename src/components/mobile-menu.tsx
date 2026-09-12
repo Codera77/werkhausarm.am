@@ -18,7 +18,10 @@ import {
 } from "lucide-react";
 
 import { SiteLogo } from "@/components/site-logo";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { categories, navLinks } from "@/lib/data";
+import { tCategory } from "@/lib/i18n/content";
+import { useI18n } from "@/lib/i18n/provider";
 
 const iconMap = {
   sofa: Sofa,
@@ -29,6 +32,13 @@ const iconMap = {
   tag: Tag,
   home: Sofa,
 } as const;
+
+const navKeyByHref: Record<string, string> = {
+  "/": "nav.home",
+  "/products": "nav.products",
+  "/about": "nav.about",
+  "/contact": "nav.contact",
+};
 
 type MobileMenuProps = {
   open: boolean;
@@ -76,6 +86,8 @@ const item = {
 };
 
 export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
+  const { t, locale } = useI18n();
+
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
@@ -96,7 +108,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
         <div className="fixed inset-0 z-[80] lg:hidden">
           <motion.button
             type="button"
-            aria-label="Close menu"
+            aria-label={t("common.closeMenu")}
             className="absolute inset-0 bg-stone-950/50 backdrop-blur-[6px]"
             variants={backdrop}
             initial="hidden"
@@ -109,7 +121,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
           <motion.aside
             role="dialog"
             aria-modal="true"
-            aria-label="Mobile menu"
+            aria-label={t("common.menu")}
             variants={panel}
             initial="hidden"
             animate="visible"
@@ -121,7 +133,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Close"
+                aria-label={t("common.close")}
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 transition-colors hover:border-stone-900 hover:text-stone-900"
               >
                 <X className="h-4 w-4" />
@@ -139,17 +151,17 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
                   variants={item}
                   className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-stone-400"
                 >
-                  Menu
+                  {t("common.menu")}
                 </motion.p>
                 {navLinks.map((link) => (
-                  <motion.div key={link.label} variants={item}>
+                  <motion.div key={link.href} variants={item}>
                     <Link
                       href={link.href}
                       onClick={onClose}
                       className="group flex items-center justify-between rounded-2xl px-3 py-3.5 transition-colors hover:bg-white"
                     >
                       <span className="font-serif text-2xl text-stone-900">
-                        {link.label}
+                        {t(navKeyByHref[link.href] ?? link.label)}
                       </span>
                       <ChevronRight className="h-4 w-4 text-stone-300 transition-transform group-hover:translate-x-0.5 group-hover:text-stone-600" />
                     </Link>
@@ -167,7 +179,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
                   variants={item}
                   className="mb-3 text-[10px] font-medium uppercase tracking-[0.22em] text-stone-400"
                 >
-                  Categories
+                  {t("common.categories")}
                 </motion.p>
                 <div className="space-y-1.5">
                   {categories.map((category) => {
@@ -184,10 +196,12 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
                           </span>
                           <span className="min-w-0 flex-1">
                             <span className="block text-sm font-medium text-stone-900">
-                              {category.label}
+                              {tCategory(locale, category.label)}
                             </span>
                             <span className="block text-[11px] text-stone-400">
-                              {category.subcategories.length} collections
+                              {t("sidebar.itemsCount", {
+                                n: category.subcategories.length,
+                              })}
                             </span>
                           </span>
                           <ChevronRight className="h-4 w-4 text-stone-300" />
@@ -205,6 +219,12 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
               transition={{ delay: 0.35, duration: 0.35, ease: "easeOut" }}
               className="border-t border-stone-200/80 bg-white/70 px-5 py-4 backdrop-blur-sm"
             >
+              <div className="mb-3 flex items-center justify-between rounded-2xl bg-stone-100 px-3 py-2">
+                <span className="text-[10px] uppercase tracking-[0.14em] text-stone-500">
+                  {t("header.language")}
+                </span>
+                <LanguageSwitcher scrolled compact={false} className="text-stone-800" />
+              </div>
               <div className="mb-3 grid grid-cols-3 gap-2">
                 <button
                   type="button"
@@ -216,7 +236,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
                 >
                   <Search className="h-4 w-4" />
                   <span className="text-[10px] uppercase tracking-[0.12em]">
-                    Search
+                    {t("common.search")}
                   </span>
                 </button>
                 <Link
@@ -226,7 +246,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
                 >
                   <Heart className="h-4 w-4" />
                   <span className="text-[10px] uppercase tracking-[0.12em]">
-                    Wishlist
+                    {t("common.wishlist")}
                   </span>
                 </Link>
                 <Link
@@ -236,7 +256,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
                 >
                   <User className="h-4 w-4" />
                   <span className="text-[10px] uppercase tracking-[0.12em]">
-                    Account
+                    {t("common.account")}
                   </span>
                 </Link>
               </div>
@@ -245,7 +265,7 @@ export function MobileMenu({ open, onClose, onOpenSearch }: MobileMenuProps) {
                 onClick={onClose}
                 className="flex h-12 items-center justify-center rounded-2xl bg-stone-900 text-[11px] uppercase tracking-[0.18em] text-white transition-colors hover:bg-stone-800"
               >
-                Shop collection
+                {t("common.shopCollection")}
               </Link>
             </motion.div>
           </motion.aside>

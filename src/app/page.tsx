@@ -18,19 +18,19 @@ export default function Home() {
         <HeroSection />
         <QuoteSection />
         <FeatureBanner
-          title="Quality Keeps Us Moving Forward."
-          body="Thoughtful materials, quiet silhouettes, and lasting comfort — designed for homes that value warmth over noise."
-          cta="Learn More"
+          titleKey="home.qualityTitle"
+          bodyKey="home.qualityBody"
+          ctaKey="common.learnMore"
           image="/abra/ba3-1.jpg"
           imageAlt="Sage green accent chair beside a sculptural stone table"
         />
         <CollectionsSection />
         <FeatureBanner
           reverse
-          eyebrow="Responsible Design"
-          title="Sourced From Sustainable Forests."
-          body="Solid oak and walnut pieces finished with care — furniture meant to age beautifully in your home."
-          cta="Discover More"
+          eyebrowKey="home.responsibleEyebrow"
+          titleKey="home.responsibleTitle"
+          bodyKey="home.responsibleBody"
+          ctaKey="common.discoverMore"
           image="/abra/ba3-2.jpg"
           imageAlt="Warm brown sofa in a sunlit living room"
         />

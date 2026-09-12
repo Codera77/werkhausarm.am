@@ -24,6 +24,8 @@ import {
   catalogSortOptions,
   type Product,
 } from "@/lib/data";
+import { tCategory } from "@/lib/i18n/content";
+import { useI18n } from "@/lib/i18n/provider";
 import { cn, formatAmd } from "@/lib/utils";
 
 type SortValue = (typeof catalogSortOptions)[number]["value"];
@@ -42,6 +44,15 @@ const defaultFilters: Filters = {
   categories: [],
   priceMin: PRICE_MIN,
   priceMax: PRICE_MAX,
+};
+
+const sortLabelKeys: Record<SortValue, string> = {
+  featured: "products.sortFeatured",
+  "best-selling": "products.sortBest",
+  "title-asc": "products.sortAZ",
+  "title-desc": "products.sortZA",
+  "price-asc": "products.sortPriceAsc",
+  "price-desc": "products.sortPriceDesc",
 };
 
 const backdrop = {
@@ -78,6 +89,7 @@ function FilterPanel({
   onClear: () => void;
   idPrefix?: string;
 }) {
+  const { t, locale } = useI18n();
   const hasActive =
     filters.categories.length > 0 ||
     filters.priceMin > PRICE_MIN ||
@@ -97,9 +109,11 @@ function FilterPanel({
       <div className="flex items-end justify-between gap-3">
         <div>
           <p className="text-[10px] uppercase tracking-[0.22em] text-stone-400">
-            Refine results
+            {t("products.refine")}
           </p>
-          <h2 className="mt-1 font-serif text-3xl text-stone-900">Filters</h2>
+          <h2 className="mt-1 font-serif text-3xl text-stone-900">
+            {t("products.filters")}
+          </h2>
         </div>
         {hasActive ? (
           <Button
@@ -110,7 +124,7 @@ function FilterPanel({
             className="h-9 rounded-full px-3 text-[11px] uppercase tracking-[0.14em] text-stone-500 hover:bg-white hover:text-stone-900"
           >
             <RotateCcw className="h-3.5 w-3.5" />
-            Reset
+            {t("common.reset")}
           </Button>
         ) : null}
       </div>
@@ -128,7 +142,7 @@ function FilterPanel({
                 variant="outline"
                 className="gap-1.5 rounded-full border-stone-300/80 bg-white/90 pr-1.5 shadow-sm"
               >
-                {category}
+                {tCategory(locale, category)}
                 <X className="h-3 w-3 text-stone-400" />
               </Badge>
             </button>
@@ -138,13 +152,13 @@ function FilterPanel({
               variant="secondary"
               className="rounded-full bg-stone-900 text-white"
             >
-              {formatAmd(filters.priceMin)} – {formatAmd(filters.priceMax)}
+              {formatAmd(filters.priceMin, locale)} –{" "}
+              {formatAmd(filters.priceMax, locale)}
             </Badge>
           ) : null}
         </div>
       ) : null}
 
-      {/* Category block */}
       <section className="overflow-hidden rounded-2xl border border-stone-200/70 bg-gradient-to-b from-white to-[#faf8f5] shadow-[0_12px_40px_-28px_rgba(28,25,23,0.35)]">
         <div className="flex items-center gap-3 border-b border-stone-200/70 px-4 py-3.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-stone-900 text-white">
@@ -152,10 +166,10 @@ function FilterPanel({
           </span>
           <div className="min-w-0 flex-1">
             <p className="text-[10px] uppercase tracking-[0.18em] text-stone-400">
-              Browse by
+              {t("products.browseBy")}
             </p>
             <h3 className="font-serif text-xl leading-tight text-stone-900">
-              Category
+              {t("products.category")}
             </h3>
           </div>
           {filters.categories.length > 0 ? (
@@ -195,7 +209,7 @@ function FilterPanel({
                 />
                 <span className="flex flex-1 items-center justify-between gap-2 text-[13px]">
                   <span className={cn(checked ? "font-medium text-white" : "")}>
-                    {category}
+                    {tCategory(locale, category)}
                   </span>
                   <span
                     className={cn(
@@ -212,7 +226,6 @@ function FilterPanel({
         </div>
       </section>
 
-      {/* Price block */}
       <section className="overflow-hidden rounded-2xl border border-stone-200/70 bg-gradient-to-b from-white to-[#faf8f5] shadow-[0_12px_40px_-28px_rgba(28,25,23,0.35)]">
         <div className="flex items-center gap-3 border-b border-stone-200/70 px-4 py-3.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-stone-900 text-white">
@@ -220,10 +233,10 @@ function FilterPanel({
           </span>
           <div className="min-w-0 flex-1">
             <p className="text-[10px] uppercase tracking-[0.18em] text-stone-400">
-              Budget
+              {t("products.budget")}
             </p>
             <h3 className="font-serif text-xl leading-tight text-stone-900">
-              Price range
+              {t("products.priceRange")}
             </h3>
           </div>
         </div>
@@ -232,18 +245,18 @@ function FilterPanel({
           <div className="grid grid-cols-2 gap-2.5">
             <div className="rounded-xl border border-stone-200/80 bg-white px-3.5 py-3 shadow-sm">
               <p className="text-[10px] uppercase tracking-[0.14em] text-stone-400">
-                From
+                {t("products.from")}
               </p>
               <p className="mt-1 truncate font-medium text-stone-900">
-                {formatAmd(filters.priceMin)}
+                {formatAmd(filters.priceMin, locale)}
               </p>
             </div>
             <div className="rounded-xl border border-stone-200/80 bg-white px-3.5 py-3 shadow-sm">
               <p className="text-[10px] uppercase tracking-[0.14em] text-stone-400">
-                To
+                {t("products.to")}
               </p>
               <p className="mt-1 truncate font-medium text-stone-900">
-                {formatAmd(filters.priceMax)}
+                {formatAmd(filters.priceMax, locale)}
               </p>
             </div>
           </div>
@@ -261,14 +274,14 @@ function FilterPanel({
                   priceMax: max,
                 }))
               }
-              aria-label="Price range"
+              aria-label={t("products.priceRange")}
               className="py-1"
             />
           </div>
 
           <div className="flex justify-between text-[11px] uppercase tracking-[0.12em] text-stone-400">
-            <span>{formatAmd(PRICE_MIN)}</span>
-            <span>{formatAmd(PRICE_MAX)}</span>
+            <span>{formatAmd(PRICE_MIN, locale)}</span>
+            <span>{formatAmd(PRICE_MAX, locale)}</span>
           </div>
         </div>
       </section>
@@ -291,6 +304,8 @@ function MobileFilterDrawer({
   onClear: () => void;
   resultCount: number;
 }) {
+  const { t } = useI18n();
+
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
@@ -311,7 +326,7 @@ function MobileFilterDrawer({
         <div className="fixed inset-0 z-[70] lg:hidden">
           <motion.button
             type="button"
-            aria-label="Close filters"
+            aria-label={t("common.close")}
             className="absolute inset-0 bg-stone-950/50 backdrop-blur-[6px]"
             variants={backdrop}
             initial="hidden"
@@ -324,7 +339,7 @@ function MobileFilterDrawer({
           <motion.aside
             role="dialog"
             aria-modal="true"
-            aria-label="Product filters"
+            aria-label={t("products.filters")}
             variants={panel}
             initial="hidden"
             animate="visible"
@@ -334,13 +349,15 @@ function MobileFilterDrawer({
             <div className="flex items-center justify-between border-b border-stone-200/80 px-5 py-4">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400">
-                  Catalog
+                  {t("common.catalog")}
                 </p>
-                <p className="font-serif text-2xl text-stone-900">Filters</p>
+                <p className="font-serif text-2xl text-stone-900">
+                  {t("products.filters")}
+                </p>
               </div>
               <button
                 type="button"
-                aria-label="Close"
+                aria-label={t("common.close")}
                 onClick={onClose}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-stone-700 shadow-sm transition-colors hover:bg-stone-900 hover:text-white"
               >
@@ -363,7 +380,7 @@ function MobileFilterDrawer({
                 onClick={onClose}
                 className="h-12 w-full rounded-2xl bg-stone-900 text-[11px] uppercase tracking-[0.18em] hover:bg-stone-800"
               >
-                Show {resultCount} products
+                {t("products.showProducts", { n: resultCount })}
               </Button>
             </div>
           </motion.aside>
@@ -394,6 +411,7 @@ function sortProducts(products: Product[], sort: SortValue) {
 }
 
 export function ProductsCatalog() {
+  const { t, locale } = useI18n();
   const [filters, setFilters] = useState<Filters>(defaultFilters);
   const [sort, setSort] = useState<SortValue>("featured");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -422,10 +440,10 @@ export function ProductsCatalog() {
   return (
     <>
       <PageHero
-        title="Products"
+        titleKey="products.heroTitle"
         breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Products" },
+          { labelKey: "common.homeCrumb", href: "/" },
+          { labelKey: "products.heroTitle" },
         ]}
       />
 
@@ -453,7 +471,7 @@ export function ProductsCatalog() {
                   onClick={() => setMobileOpen(true)}
                 >
                   <SlidersHorizontal className="h-4 w-4" />
-                  Filter
+                  {t("products.filter")}
                   {activeCount > 0 ? (
                     <Badge variant="default" className="ml-0.5 rounded-full px-1.5 py-0">
                       {activeCount}
@@ -462,11 +480,10 @@ export function ProductsCatalog() {
                 </Button>
 
                 <p className="text-sm text-stone-500">
-                  Showing{" "}
-                  <span className="font-medium text-stone-800">
-                    {filtered.length}
-                  </span>{" "}
-                  of {catalogProducts.length} products
+                  {t("products.showing", {
+                    shown: filtered.length,
+                    total: catalogProducts.length,
+                  })}
                 </p>
               </div>
 
@@ -479,7 +496,7 @@ export function ProductsCatalog() {
                   >
                     {catalogSortOptions.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label}
+                        {t(sortLabelKeys[option.value])}
                       </option>
                     ))}
                   </select>
@@ -509,7 +526,7 @@ export function ProductsCatalog() {
                       variant="outline"
                       className="gap-1.5 rounded-full bg-white pr-1.5"
                     >
-                      {chip}
+                      {tCategory(locale, chip)}
                       <X className="h-3 w-3" />
                     </Badge>
                   </button>
@@ -521,7 +538,7 @@ export function ProductsCatalog() {
                   onClick={clearFilters}
                   className="h-8 rounded-full px-3 text-[11px] uppercase tracking-[0.14em]"
                 >
-                  Clear all
+                  {t("common.clearAll")}
                 </Button>
               </div>
             ) : null}
@@ -529,17 +546,17 @@ export function ProductsCatalog() {
             {filtered.length === 0 ? (
               <div className="border border-dashed border-stone-300 py-20 text-center">
                 <p className="font-serif text-2xl text-stone-800">
-                  No products found
+                  {t("products.noFound")}
                 </p>
                 <p className="mt-2 text-sm text-stone-500">
-                  Try adjusting filters or clear all selections.
+                  {t("products.noFoundHint")}
                 </p>
                 <Button
                   variant="outline"
                   className="mt-6 rounded-none"
                   onClick={clearFilters}
                 >
-                  Clear filters
+                  {t("products.clearFilters")}
                 </Button>
               </div>
             ) : (

@@ -7,10 +7,26 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { heroSlides } from "@/lib/data";
+import { useI18n } from "@/lib/i18n/provider";
+
+const slideCopyKeys = [
+  {
+    eyebrow: "hero.slide1Eyebrow",
+    title: "hero.slide1Title",
+    cta: "hero.slide1Cta",
+  },
+  {
+    eyebrow: "hero.slide2Eyebrow",
+    title: "hero.slide2Title",
+    cta: "hero.slide2Cta",
+  },
+] as const;
 
 export function HeroSection() {
+  const { t } = useI18n();
   const [index, setIndex] = useState(0);
   const slide = heroSlides[index];
+  const copy = slideCopyKeys[index] ?? slideCopyKeys[0];
 
   const prev = () =>
     setIndex((current) => (current === 0 ? heroSlides.length - 1 : current - 1));
@@ -49,17 +65,17 @@ export function HeroSection() {
           className="max-w-xl"
         >
           <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-white/80">
-            {slide.eyebrow}
+            {t(copy.eyebrow)}
           </p>
           <h1 className="whitespace-pre-line font-serif text-4xl leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
-            {slide.title}
+            {t(copy.title)}
           </h1>
           <Button
             variant="outline"
             size="lg"
             className="mt-8 rounded-none border-white/80 bg-transparent px-8 text-[12px] uppercase tracking-[0.18em] text-white hover:bg-white hover:text-stone-900"
           >
-            {slide.cta}
+            {t(copy.cta)}
           </Button>
         </motion.div>
 
@@ -67,7 +83,7 @@ export function HeroSection() {
           <button
             type="button"
             onClick={prev}
-            aria-label="Previous slide"
+            aria-label={t("common.previous")}
             className="flex h-10 w-10 items-center justify-center border border-white/40 text-white transition-colors hover:bg-white hover:text-stone-900"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -75,7 +91,7 @@ export function HeroSection() {
           <button
             type="button"
             onClick={next}
-            aria-label="Next slide"
+            aria-label={t("common.next")}
             className="flex h-10 w-10 items-center justify-center border border-white/40 text-white transition-colors hover:bg-white hover:text-stone-900"
           >
             <ChevronRight className="h-4 w-4" />

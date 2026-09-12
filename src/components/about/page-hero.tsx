@@ -4,17 +4,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 type PageHeroProps = {
-  title: string;
-  breadcrumbs?: { label: string; href?: string }[];
+  title?: string;
+  titleKey?: string;
+  breadcrumbs?: { label?: string; labelKey?: string; href?: string }[];
   image?: string;
 };
 
 export function PageHero({
   title,
-  breadcrumbs = [{ label: "Home", href: "/" }, { label: title }],
+  titleKey,
+  breadcrumbs,
   image = "/abra/about/Breadcrumb.jpg",
 }: PageHeroProps) {
+  const { t } = useI18n();
+  const resolvedTitle = titleKey ? t(titleKey) : (title ?? "");
+  const crumbs =
+    breadcrumbs ??
+    [
+      { labelKey: "common.homeCrumb", href: "/" },
+      { label: resolvedTitle },
+    ];
+
   return (
     <section className="relative flex min-h-[42vh] items-end overflow-hidden md:min-h-[48vh]">
       <Image
@@ -33,21 +46,26 @@ export function PageHero({
           transition={{ duration: 0.45, ease: "easeInOut" }}
         >
           <nav className="mb-3 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/75">
-            {breadcrumbs.map((crumb, index) => (
-              <span key={`${crumb.label}-${index}`} className="flex items-center gap-2">
-                {index > 0 ? <span className="text-white/40">/</span> : null}
-                {crumb.href ? (
-                  <Link href={crumb.href} className="hover:text-white">
-                    {crumb.label}
-                  </Link>
-                ) : (
-                  <span className="text-white">{crumb.label}</span>
-                )}
-              </span>
-            ))}
+            {crumbs.map((crumb, index) => {
+              const label = crumb.labelKey
+                ? t(crumb.labelKey)
+                : (crumb.label ?? "");
+              return (
+                <span key={`${label}-${index}`} className="flex items-center gap-2">
+                  {index > 0 ? <span className="text-white/40">/</span> : null}
+                  {crumb.href ? (
+                    <Link href={crumb.href} className="hover:text-white">
+                      {label}
+                    </Link>
+                  ) : (
+                    <span className="text-white">{label}</span>
+                  )}
+                </span>
+              );
+            })}
           </nav>
           <h1 className="font-serif text-4xl text-white md:text-5xl lg:text-6xl">
-            {title}
+            {resolvedTitle}
           </h1>
         </motion.div>
       </div>

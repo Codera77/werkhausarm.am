@@ -4,55 +4,11 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 import { contactInfo } from "@/lib/data";
-
-const infoItems = [
-  {
-    icon: MapPin,
-    label: contactInfo.addressLabel,
-    content: (
-      <>
-        <p>{contactInfo.addressLine}</p>
-        <p className="mt-2 text-stone-500">{contactInfo.address}</p>
-      </>
-    ),
-  },
-  {
-    icon: Phone,
-    label: contactInfo.phoneLabel,
-    content: (
-      <a
-        href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
-        className="transition-colors hover:text-stone-900"
-      >
-        {contactInfo.phone}
-      </a>
-    ),
-  },
-  {
-    icon: Mail,
-    label: contactInfo.emailLabel,
-    content: (
-      <a
-        href={`mailto:${contactInfo.email}`}
-        className="transition-colors hover:text-stone-900"
-      >
-        {contactInfo.email}
-      </a>
-    ),
-  },
-  {
-    icon: Clock,
-    label: contactInfo.hoursLabel,
-    content: (
-      <>
-        <p>{contactInfo.hoursWeekday}</p>
-        <p>{contactInfo.hoursWeekend}</p>
-      </>
-    ),
-  },
-] as const;
+import { useI18n } from "@/lib/i18n/provider";
 
 export function ContactMap() {
+  const { t } = useI18n();
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -62,7 +18,7 @@ export function ContactMap() {
     >
       <div className="relative aspect-[21/9] min-h-[240px] w-full md:min-h-[360px]">
         <iframe
-          title="Yerevan location map"
+          title={t("contact.openMap")}
           src={contactInfo.mapEmbedUrl}
           className="absolute inset-0 h-full w-full border-0 grayscale-[20%] contrast-[1.02]"
           loading="lazy"
@@ -75,7 +31,7 @@ export function ContactMap() {
           rel="noopener noreferrer"
           className="absolute bottom-4 left-4 bg-white/95 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-stone-800 shadow-md backdrop-blur-sm transition-colors hover:bg-stone-900 hover:text-white"
         >
-          Open Yerevan map
+          {t("contact.openMap")}
         </a>
       </div>
     </motion.section>
@@ -83,6 +39,55 @@ export function ContactMap() {
 }
 
 export function ContactDetails() {
+  const { t } = useI18n();
+
+  const infoItems = [
+    {
+      icon: MapPin,
+      label: t("contact.addressLabel"),
+      content: (
+        <>
+          <p>{t("contact.addressLine")}</p>
+          <p className="mt-2 text-stone-500">{t("contact.address")}</p>
+        </>
+      ),
+    },
+    {
+      icon: Phone,
+      label: t("contact.phoneLabel"),
+      content: (
+        <a
+          href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+          className="transition-colors hover:text-stone-900"
+        >
+          {contactInfo.phone}
+        </a>
+      ),
+    },
+    {
+      icon: Mail,
+      label: t("contact.emailLabel"),
+      content: (
+        <a
+          href={`mailto:${contactInfo.email}`}
+          className="transition-colors hover:text-stone-900"
+        >
+          {contactInfo.email}
+        </a>
+      ),
+    },
+    {
+      icon: Clock,
+      label: t("contact.hoursLabel"),
+      content: (
+        <>
+          <p>{t("contact.hoursWeekday")}</p>
+          <p>{t("contact.hoursWeekend")}</p>
+        </>
+      ),
+    },
+  ] as const;
+
   return (
     <div>
       <motion.h1
@@ -92,7 +97,7 @@ export function ContactDetails() {
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="font-serif text-4xl text-stone-900 md:text-5xl"
       >
-        {contactInfo.title}
+        {t("contact.title")}
       </motion.h1>
 
       <div className="mt-10 space-y-8">

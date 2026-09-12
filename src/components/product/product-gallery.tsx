@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
 type ProductGalleryProps = {
@@ -14,6 +15,7 @@ type ProductGalleryProps = {
 const ZOOM_SCALE = 2.35;
 
 export function ProductGallery({ images, alt }: ProductGalleryProps) {
+  const { t } = useI18n();
   const [active, setActive] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
   const [origin, setOrigin] = useState({ x: 50, y: 50 });
@@ -105,7 +107,7 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
             isZooming ? "opacity-0" : "opacity-100"
           )}
         >
-          Hover to zoom
+          {t("product.hoverZoom")}
         </div>
       </div>
     </div>

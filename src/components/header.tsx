@@ -4,38 +4,31 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Search,
-  User,
-  Heart,
-  Menu,
-  X,
-  ChevronDown,
-  Check,
-} from "lucide-react";
+import { Search, User, Heart, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { navLinks } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { SiteLogo } from "@/components/site-logo";
 import { SearchOverlay } from "@/components/search-overlay";
 import { MobileMenu } from "@/components/mobile-menu";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { useWishlist } from "@/components/wishlist/wishlist-provider";
+import { useI18n } from "@/lib/i18n/provider";
 
-type Language = "EN" | "AM";
+const navKeyByHref: Record<string, string> = {
+  "/": "nav.home",
+  "/products": "nav.products",
+  "/about": "nav.about",
+  "/contact": "nav.contact",
+};
 
 export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const { count: wishlistCount } = useWishlist();
+  const { t } = useI18n();
   const [scrolled, setScrolled] = useState(!isHome);
-  const [language, setLanguage] = useState<Language>("EN");
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -70,7 +63,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? t("common.closeMenu") : t("common.openMenu")}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((open) => !open)}
               className={cn(
@@ -111,7 +104,7 @@ export function Header() {
           <nav className="hidden flex-1 items-center gap-1 lg:flex">
             {navLinks.map((link) => (
               <Link
-                key={link.label}
+                key={link.href}
                 href={link.href}
                 className={cn(
                   "inline-flex h-9 items-center rounded-md px-3 text-[12px] uppercase tracking-[0.16em] transition-colors",
@@ -120,7 +113,7 @@ export function Header() {
                     : "text-white hover:bg-white/10"
                 )}
               >
-                {link.label}
+                {t(navKeyByHref[link.href] ?? link.label)}
               </Link>
             ))}
           </nav>
@@ -132,50 +125,12 @@ export function Header() {
           />
 
           <div className="flex flex-1 items-center justify-end gap-0.5 md:gap-1">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={cn(
-                    "hidden gap-1 rounded-md px-2 text-[11px] uppercase tracking-[0.12em] md:inline-flex",
-                    scrolled
-                      ? "text-stone-700 hover:bg-stone-200/50"
-                      : "text-white hover:bg-white/10"
-                  )}
-                >
-                  {language === "EN" ? "English" : "Հայերեն"}
-                  <ChevronDown className="h-3 w-3 opacity-70" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-36">
-                {(["EN", "AM"] as Language[]).map((lang) => (
-                  <DropdownMenuItem
-                    key={lang}
-                    onClick={() => setLanguage(lang)}
-                    className="justify-between"
-                  >
-                    {lang === "EN" ? "English" : "Հայերեն"}
-                    <AnimatePresence>
-                      {language === lang && (
-                        <motion.span
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0 }}
-                        >
-                          <Check className="h-3.5 w-3.5" />
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <LanguageSwitcher scrolled={scrolled} />
 
             <Button
               variant="ghost"
               size="icon"
-              aria-label="Search"
+              aria-label={t("common.search")}
               onClick={() => setSearchOpen(true)}
               className={cn(
                 scrolled
@@ -189,7 +144,7 @@ export function Header() {
               asChild
               variant="ghost"
               size="icon"
-              aria-label="Account"
+              aria-label={t("common.account")}
               className={cn(
                 scrolled
                   ? "text-stone-800 hover:bg-stone-200/50"
@@ -204,7 +159,7 @@ export function Header() {
               asChild
               variant="ghost"
               size="icon"
-              aria-label="Wishlist"
+              aria-label={t("common.wishlist")}
               className={cn(
                 "relative",
                 scrolled

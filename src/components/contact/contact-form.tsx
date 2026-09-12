@@ -4,9 +4,10 @@ import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
-import { contactInfo } from "@/lib/data";
+import { useI18n } from "@/lib/i18n/provider";
 
 export function ContactForm() {
+  const { t } = useI18n();
   const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -23,37 +24,37 @@ export function ContactForm() {
       transition={{ duration: 0.45, ease: "easeInOut" }}
     >
       <h2 className="font-serif text-3xl text-stone-900 md:text-4xl">
-        {contactInfo.formTitle}
+        {t("contact.formTitle")}
       </h2>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-4">
         <label className="block">
-          <span className="sr-only">Your name</span>
+          <span className="sr-only">{t("contact.namePlaceholder")}</span>
           <input
             required
             type="text"
             name="name"
-            placeholder="Your name..."
+            placeholder={t("contact.namePlaceholder")}
             className="h-12 w-full border border-stone-300 bg-white px-4 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-stone-900"
           />
         </label>
         <label className="block">
-          <span className="sr-only">Your email</span>
+          <span className="sr-only">{t("contact.emailPlaceholder")}</span>
           <input
             required
             type="email"
             name="email"
-            placeholder="Your email..."
+            placeholder={t("contact.emailPlaceholder")}
             className="h-12 w-full border border-stone-300 bg-white px-4 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-stone-900"
           />
         </label>
         <label className="block">
-          <span className="sr-only">Your message</span>
+          <span className="sr-only">{t("contact.messagePlaceholder")}</span>
           <textarea
             required
             name="message"
             rows={6}
-            placeholder="Your message..."
+            placeholder={t("contact.messagePlaceholder")}
             className="w-full resize-y border border-stone-300 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-stone-900"
           />
         </label>
@@ -62,7 +63,7 @@ export function ContactForm() {
           type="submit"
           className="h-12 rounded-none bg-stone-900 px-10 text-[11px] uppercase tracking-[0.18em] hover:bg-stone-800"
         >
-          Submit
+          {t("contact.submit")}
         </Button>
 
         {submitted ? (
@@ -71,7 +72,7 @@ export function ContactForm() {
             animate={{ opacity: 1, y: 0 }}
             className="text-sm text-stone-600"
           >
-            Thank you — your message has been received. We will reply soon.
+            {t("contact.thanks")}
           </motion.p>
         ) : null}
       </form>

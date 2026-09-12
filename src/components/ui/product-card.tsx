@@ -8,6 +8,8 @@ import { Heart, Eye, ExternalLink } from "lucide-react";
 
 import { useWishlist } from "@/components/wishlist/wishlist-provider";
 import type { Product } from "@/lib/data";
+import { localizeProduct } from "@/lib/i18n/content";
+import { useI18n } from "@/lib/i18n/provider";
 import { cn, formatAmd } from "@/lib/utils";
 
 type ProductCardProps = {
@@ -15,11 +17,19 @@ type ProductCardProps = {
   className?: string;
 };
 
+const badgeKeyByValue: Record<string, string> = {
+  Sale: "badge.sale",
+  New: "badge.new",
+  Hot: "badge.hot",
+};
+
 export function ProductCard({ product, className }: ProductCardProps) {
+  const { t, locale } = useI18n();
+  const localized = localizeProduct(product, locale);
   const { isWishlisted, toggle } = useWishlist();
   const [isHovered, setIsHovered] = useState(false);
-  const href = `/products/${product.id}`;
-  const favorited = isWishlisted(product.id);
+  const href = `/products/${localized.id}`;
+  const favorited = isWishlisted(localized.id);
 
   return (
     <motion.div
@@ -36,8 +46,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
             className="absolute inset-0"
           >
             <Image
-              src={product.image}
-              alt={product.imageAlt}
+              src={localized.image}
+              alt={localized.imageAlt}
               fill
               sizes="(max-width: 768px) 50vw, 25vw"
               className="object-cover"
@@ -45,25 +55,25 @@ export function ProductCard({ product, className }: ProductCardProps) {
           </motion.div>
         </Link>
 
-        {product.badge ? (
+        {localized.badge ? (
           <span
             className={cn(
               "pointer-events-none absolute left-3 top-3 z-10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white",
-              product.badge === "Sale" && "bg-[#c45c4a]",
-              product.badge === "New" && "bg-stone-900",
-              product.badge === "Hot" && "bg-stone-700"
+              localized.badge === "Sale" && "bg-[#c45c4a]",
+              localized.badge === "New" && "bg-stone-900",
+              localized.badge === "Hot" && "bg-stone-700"
             )}
           >
-            {product.badge}
+            {t(badgeKeyByValue[localized.badge] ?? localized.badge)}
           </span>
         ) : null}
 
         <button
           type="button"
-          aria-label={favorited ? "Remove from wishlist" : "Add to wishlist"}
+          aria-label={t("common.wishlist")}
           onClick={(event) => {
             event.preventDefault();
-            toggle(product.id);
+            toggle(localized.id);
           }}
           className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center bg-white/90 text-stone-700 transition-colors hover:bg-white"
         >
@@ -84,9 +94,9 @@ export function ProductCard({ product, className }: ProductCardProps) {
               transition={{ duration: 0.25, ease: "easeInOut" }}
               className="absolute inset-x-3 bottom-3 z-10 flex justify-end gap-2"
             >
-              {product.instagramUrl ? (
+              {localized.instagramUrl ? (
                 <a
-                  href={product.instagramUrl}
+                  href={localized.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="View on Instagram"
@@ -97,7 +107,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
               ) : null}
               <Link
                 href={href}
-                aria-label="Quick view"
+                aria-label={t("product.quickView")}
                 className="flex h-9 w-9 items-center justify-center bg-stone-900 text-white transition-colors hover:bg-stone-800"
               >
                 <Eye className="h-3.5 w-3.5" />
@@ -108,20 +118,20 @@ export function ProductCard({ product, className }: ProductCardProps) {
       </div>
 
       <Link href={href} className="block space-y-1.5 pt-4 text-center">
-        <h3 className="text-sm tracking-wide text-stone-900">{product.name}</h3>
+        <h3 className="text-sm tracking-wide text-stone-900">{localized.name}</h3>
         <div className="flex items-center justify-center gap-2 text-sm">
-          {product.compareAtPrice ? (
+          {localized.compareAtPrice ? (
             <span className="text-stone-400 line-through">
-              {formatAmd(product.compareAtPrice)}
+              {formatAmd(localized.compareAtPrice, locale)}
             </span>
           ) : null}
           <span
             className={cn(
               "font-medium",
-              product.compareAtPrice ? "text-[#c45c4a]" : "text-stone-800"
+              localized.compareAtPrice ? "text-[#c45c4a]" : "text-stone-800"
             )}
           >
-            {formatAmd(product.price)}
+            {formatAmd(localized.price, locale)}
           </span>
         </div>
       </Link>

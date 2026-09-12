@@ -6,8 +6,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Globe2, Share2, AtSign } from "lucide-react";
 
 import { aboutTeam } from "@/lib/data";
+import { useI18n } from "@/lib/i18n/provider";
+
+const roleKeyByLabel: Record<string, string> = {
+  Ceo: "about.memberCeo",
+  CEO: "about.memberCeo",
+  Designer: "about.memberDesigner",
+};
 
 export function TeamSection() {
+  const { t } = useI18n();
   const [start, setStart] = useState(0);
   const visibleCount = 2;
   const members = aboutTeam.members;
@@ -37,16 +45,16 @@ export function TeamSection() {
           className="flex flex-col justify-center"
         >
           <h2 className="font-serif text-4xl leading-tight text-stone-900 md:text-5xl">
-            {aboutTeam.title}
+            {t("about.teamTitle")}
           </h2>
           <p className="mt-6 text-[15px] leading-7 text-stone-600">
-            {aboutTeam.description}
+            {t("about.teamBody")}
           </p>
           <div className="mt-8 flex gap-2">
             <button
               type="button"
               onClick={prev}
-              aria-label="Previous team members"
+              aria-label={t("common.previous")}
               className="flex h-10 w-10 items-center justify-center border border-stone-300 text-stone-700 transition-colors hover:border-stone-900 hover:bg-stone-900 hover:text-white"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -54,7 +62,7 @@ export function TeamSection() {
             <button
               type="button"
               onClick={next}
-              aria-label="Next team members"
+              aria-label={t("common.next")}
               className="flex h-10 w-10 items-center justify-center border border-stone-300 text-stone-700 transition-colors hover:border-stone-900 hover:bg-stone-900 hover:text-white"
             >
               <ChevronRight className="h-4 w-4" />
@@ -96,7 +104,7 @@ export function TeamSection() {
                 </div>
                 <h3 className="mt-4 text-lg text-stone-900">{member.name}</h3>
                 <p className="text-sm uppercase tracking-[0.14em] text-stone-500">
-                  {member.role}
+                  {t(roleKeyByLabel[member.role] ?? member.role)}
                 </p>
               </motion.article>
             ))}

@@ -8,11 +8,13 @@ import { ArrowLeft, Eye, EyeOff, Lock, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SiteLogo } from "@/components/site-logo";
+import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
 type Mode = "signin" | "register";
 
 export function LoginPageContent() {
+  const { t } = useI18n();
   const [mode, setMode] = useState<Mode>("signin");
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(true);
@@ -29,14 +31,12 @@ export function LoginPageContent() {
 
   return (
     <div className="relative flex min-h-dvh bg-[#f4f1ed]">
-      {/* Atmosphere */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(180,160,140,0.18),transparent_50%),radial-gradient(ellipse_at_100%_100%,rgba(28,25,23,0.06),transparent_45%)]"
       />
 
       <div className="relative mx-auto grid w-full max-w-[1280px] flex-1 lg:grid-cols-2">
-        {/* Visual panel */}
         <motion.aside
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -67,20 +67,18 @@ export function LoginPageContent() {
               className="max-w-md"
             >
               <p className="text-[11px] uppercase tracking-[0.28em] text-white/65">
-                Member access
+                {t("login.memberAccess")}
               </p>
               <h1 className="mt-4 font-serif text-5xl leading-[1.05] text-white xl:text-6xl">
                 Werkhaus
               </h1>
               <p className="mt-5 text-[15px] leading-relaxed text-white/75">
-                Sign in to save pieces, follow collections, and keep your
-                curated home vision in one quiet place.
+                {t("login.pitch")}
               </p>
             </motion.div>
           </div>
         </motion.aside>
 
-        {/* Form panel */}
         <section className="relative flex min-h-dvh flex-col px-6 py-8 sm:px-10 md:px-14 lg:px-12 xl:px-16">
           <div className="mb-10 flex items-center justify-between lg:mb-0">
             <div className="lg:hidden">
@@ -91,7 +89,7 @@ export function LoginPageContent() {
               className="ml-auto inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-stone-500 transition-colors hover:text-stone-900"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
-              Back to store
+              {t("common.backToStore")}
             </Link>
           </div>
 
@@ -103,22 +101,22 @@ export function LoginPageContent() {
               className="mx-auto w-full max-w-[420px]"
             >
               <p className="text-[11px] uppercase tracking-[0.22em] text-stone-400">
-                {mode === "signin" ? "Welcome back" : "Join Werkhaus"}
+                {mode === "signin" ? t("login.welcomeBack") : t("login.joinTitle")}
               </p>
               <h2 className="mt-3 font-serif text-4xl text-stone-900 md:text-[2.75rem]">
-                {mode === "signin" ? "Sign in" : "Create account"}
+                {mode === "signin" ? t("login.signIn") : t("login.createAccount")}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-stone-500">
                 {mode === "signin"
-                  ? "Enter your details to continue to your account."
-                  : "Create an account to save favorites and explore collections."}
+                  ? t("login.signInCopy")
+                  : t("login.registerCopy")}
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-1 border-b border-stone-200">
                 {(
                   [
-                    { id: "signin", label: "Sign in" },
-                    { id: "register", label: "Register" },
+                    { id: "signin", labelKey: "login.signIn" },
+                    { id: "register", labelKey: "login.register" },
                   ] as const
                 ).map((tab) => (
                   <button
@@ -135,7 +133,7 @@ export function LoginPageContent() {
                         : "text-stone-400 hover:text-stone-600"
                     )}
                   >
-                    {tab.label}
+                    {t(tab.labelKey)}
                     {mode === tab.id ? (
                       <motion.span
                         layoutId="login-tab"
@@ -158,14 +156,14 @@ export function LoginPageContent() {
                       className="block overflow-hidden"
                     >
                       <span className="mb-2 block text-[11px] uppercase tracking-[0.14em] text-stone-500">
-                        Full name
+                        {t("login.fullName")}
                       </span>
                       <input
                         required={mode === "register"}
                         type="text"
                         name="name"
                         autoComplete="name"
-                        placeholder="Your name"
+                        placeholder={t("login.yourName")}
                         className="h-12 w-full border border-stone-300 bg-white/80 px-4 text-sm text-stone-900 outline-none backdrop-blur-sm transition-colors placeholder:text-stone-400 focus:border-stone-900"
                       />
                     </motion.label>
@@ -174,7 +172,7 @@ export function LoginPageContent() {
 
                 <label className="block">
                   <span className="mb-2 block text-[11px] uppercase tracking-[0.14em] text-stone-500">
-                    Email
+                    {t("login.email")}
                   </span>
                   <span className="relative block">
                     <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
@@ -183,7 +181,7 @@ export function LoginPageContent() {
                       type="email"
                       name="email"
                       autoComplete="email"
-                      placeholder="you@example.com"
+                      placeholder={t("login.emailPlaceholder")}
                       className="h-12 w-full border border-stone-300 bg-white/80 py-0 pl-11 pr-4 text-sm text-stone-900 outline-none backdrop-blur-sm transition-colors placeholder:text-stone-400 focus:border-stone-900"
                     />
                   </span>
@@ -191,13 +189,13 @@ export function LoginPageContent() {
 
                 <label className="block">
                   <span className="mb-2 flex items-center justify-between text-[11px] uppercase tracking-[0.14em] text-stone-500">
-                    <span>Password</span>
+                    <span>{t("login.password")}</span>
                     {mode === "signin" ? (
                       <button
                         type="button"
                         className="normal-case tracking-normal text-stone-500 underline-offset-2 hover:text-stone-900 hover:underline"
                       >
-                        Forgot?
+                        {t("login.forgot")}
                       </button>
                     ) : null}
                   </span>
@@ -239,12 +237,13 @@ export function LoginPageContent() {
                       onChange={(e) => setRemember(e.target.checked)}
                       className="h-4 w-4 accent-stone-900"
                     />
-                    <span className="text-sm text-stone-600">Remember me</span>
+                    <span className="text-sm text-stone-600">
+                      {t("login.remember")}
+                    </span>
                   </label>
                 ) : (
                   <p className="pt-1 text-xs leading-relaxed text-stone-500">
-                    By creating an account you agree to our terms of use and
-                    privacy policy.
+                    {t("login.terms")}
                   </p>
                 )}
 
@@ -254,10 +253,10 @@ export function LoginPageContent() {
                   className="mt-2 h-12 w-full rounded-none bg-stone-900 text-[11px] uppercase tracking-[0.2em] hover:bg-stone-800 disabled:opacity-70"
                 >
                   {status === "loading"
-                    ? "Please wait…"
+                    ? t("login.pleaseWait")
                     : mode === "signin"
-                      ? "Sign in"
-                      : "Create account"}
+                      ? t("login.signIn")
+                      : t("login.createAccount")}
                 </Button>
 
                 <AnimatePresence>
@@ -269,20 +268,20 @@ export function LoginPageContent() {
                       className="text-center text-sm text-stone-600"
                     >
                       {mode === "signin"
-                        ? "Signed in successfully. Welcome back."
-                        : "Account created. You can now sign in."}
+                        ? t("login.successSignIn")
+                        : t("login.successRegister")}
                     </motion.p>
                   ) : null}
                 </AnimatePresence>
               </form>
 
               <p className="mt-10 text-center text-sm text-stone-500">
-                Prefer browsing first?{" "}
+                {t("login.preferBrowse")}{" "}
                 <Link
                   href="/products"
                   className="text-stone-900 underline-offset-4 hover:underline"
                 >
-                  View collection
+                  {t("login.viewCollection")}
                 </Link>
               </p>
             </motion.div>

@@ -19,7 +19,7 @@ export default function AboutPage() {
     <>
       <Header />
       <main className="flex-1">
-        <PageHero title="About Us" />
+        <PageHero titleKey="about.heroTitle" />
         <OurStorySection />
         <TeamSection />
         <CommitmentBanner />

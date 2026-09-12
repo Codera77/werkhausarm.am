@@ -11,28 +11,38 @@ import { ProductCard } from "@/components/ui/product-card";
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/components/wishlist/wishlist-provider";
 import { catalogProducts } from "@/lib/data";
+import { localizeProduct } from "@/lib/i18n/content";
+import { useI18n } from "@/lib/i18n/provider";
 import { cn, formatAmd } from "@/lib/utils";
 
 const WISHLIST_PER_PAGE = 6;
 const RELATED_PER_PAGE = 4;
 
 export function WishlistPageContent() {
+  const { t, locale } = useI18n();
   const { items, count, remove, clear } = useWishlist();
   const [page, setPage] = useState(1);
   const [relatedPage, setRelatedPage] = useState(1);
 
-  const totalPages = Math.max(1, Math.ceil(items.length / WISHLIST_PER_PAGE));
+  const localizedItems = useMemo(
+    () => items.map((product) => localizeProduct(product, locale)),
+    [items, locale]
+  );
+
+  const totalPages = Math.max(1, Math.ceil(localizedItems.length / WISHLIST_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
 
   const pageItems = useMemo(() => {
     const start = (currentPage - 1) * WISHLIST_PER_PAGE;
-    return items.slice(start, start + WISHLIST_PER_PAGE);
-  }, [items, currentPage]);
+    return localizedItems.slice(start, start + WISHLIST_PER_PAGE);
+  }, [localizedItems, currentPage]);
 
   const related = useMemo(() => {
     const wishIds = new Set(items.map((item) => item.id));
-    return catalogProducts.filter((product) => !wishIds.has(product.id));
-  }, [items]);
+    return catalogProducts
+      .filter((product) => !wishIds.has(product.id))
+      .map((product) => localizeProduct(product, locale));
+  }, [items, locale]);
 
   const relatedTotalPages = Math.max(
     1,
@@ -46,17 +56,19 @@ export function WishlistPageContent() {
 
   return (
     <>
-      <PageHero title="Wishlist" />
+      <PageHero titleKey="wishlist.title" />
 
       <section className="px-6 py-12 md:px-12 md:py-16 lg:px-16">
         <div className="mx-auto max-w-[1200px]">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.2em] text-stone-400">
-                Saved pieces
+                {t("wishlist.savedPieces")}
               </p>
               <h2 className="mt-1 font-serif text-3xl text-stone-900">
-                {count} item{count === 1 ? "" : "s"}
+                {count === 1
+                  ? t("wishlist.itemCount", { n: count })
+                  : t("wishlist.itemsCount", { n: count })}
               </h2>
             </div>
             {count > 0 ? (
@@ -65,7 +77,7 @@ export function WishlistPageContent() {
                 onClick={clear}
                 className="text-[11px] uppercase tracking-[0.16em] text-stone-500 underline-offset-4 hover:text-stone-900 hover:underline"
               >
-                Clear wishlist
+                {t("wishlist.clear")}
               </button>
             ) : null}
           </div>
@@ -78,32 +90,32 @@ export function WishlistPageContent() {
             >
               <Heart className="mx-auto h-10 w-10 text-stone-300" strokeWidth={1.25} />
               <p className="mt-5 font-serif text-3xl text-stone-900">
-                Your wishlist is empty
+                {t("wishlist.emptyTitle")}
               </p>
               <p className="mt-3 text-sm text-stone-500">
-                Save pieces you love and revisit them anytime.
+                {t("wishlist.emptyBody")}
               </p>
               <Button
                 asChild
                 className="mt-8 rounded-none bg-stone-900 px-8 text-[11px] uppercase tracking-[0.16em]"
               >
-                <Link href="/products">Continue shopping</Link>
+                <Link href="/products">{t("wishlist.continueShopping")}</Link>
               </Button>
             </motion.div>
           ) : (
             <>
               <div className="hidden border-b border-stone-200 pb-3 md:grid md:grid-cols-[minmax(0,1.4fr)_160px_140px_180px] md:gap-4">
                 <p className="text-[11px] uppercase tracking-[0.16em] text-stone-400">
-                  Product
+                  {t("wishlist.product")}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.16em] text-stone-400">
-                  Price
+                  {t("wishlist.price")}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.16em] text-stone-400">
-                  Stock status
+                  {t("wishlist.stock")}
                 </p>
                 <p className="text-right text-[11px] uppercase tracking-[0.16em] text-stone-400">
-                  Action
+                  {t("wishlist.action")}
                 </p>
               </div>
 
@@ -122,7 +134,7 @@ export function WishlistPageContent() {
                       <div className="flex items-center gap-4">
                         <button
                           type="button"
-                          aria-label={`Remove ${product.name}`}
+                          aria-label={`${t("common.close")} ${product.name}`}
                           onClick={() => {
                             remove(product.id);
                             if (pageItems.length === 1 && currentPage > 1) {
@@ -161,11 +173,11 @@ export function WishlistPageContent() {
 
                       <div className="flex items-center gap-2 text-sm md:block">
                         <span className="md:hidden text-[11px] uppercase tracking-[0.14em] text-stone-400">
-                          Price
+                          {t("wishlist.price")}
                         </span>
                         {product.compareAtPrice ? (
                           <span className="mr-2 text-stone-400 line-through">
-                            {formatAmd(product.compareAtPrice)}
+                            {formatAmd(product.compareAtPrice, locale)}
                           </span>
                         ) : null}
                         <span
@@ -176,24 +188,24 @@ export function WishlistPageContent() {
                               : "text-stone-800"
                           )}
                         >
-                          {formatAmd(product.price)}
+                          {formatAmd(product.price, locale)}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2 text-sm md:block">
                         <span className="md:hidden text-[11px] uppercase tracking-[0.14em] text-stone-400">
-                          Stock
+                          {t("wishlist.stock")}
                         </span>
                         <span className="inline-flex items-center gap-1.5 text-emerald-700">
                           <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
-                          In stock
+                          {t("wishlist.inStock")}
                         </span>
                       </div>
 
                       <div className="md:justify-self-end">
                         <Button className="h-11 w-full rounded-none bg-stone-900 px-4 text-[11px] uppercase tracking-[0.14em] hover:bg-stone-800 md:w-auto">
                           <ShoppingBag className="h-3.5 w-3.5" />
-                          Add to cart
+                          {t("wishlist.addToCart")}
                         </Button>
                       </div>
                     </motion.li>
@@ -216,7 +228,7 @@ export function WishlistPageContent() {
             <div className="mt-20 border-t border-stone-200 pt-14">
               <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
                 <h3 className="font-serif text-3xl text-stone-900 md:text-4xl">
-                  You May Also Like
+                  {t("wishlist.alsoLike")}
                 </h3>
                 {relatedTotalPages > 1 ? (
                   <Pagination
@@ -261,13 +273,14 @@ function Pagination({
   className?: string;
   compact?: boolean;
 }) {
+  const { t } = useI18n();
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
     <div className={cn("flex items-center justify-center gap-2", className)}>
       <button
         type="button"
-        aria-label="Previous page"
+        aria-label={t("common.previous")}
         disabled={page <= 1}
         onClick={() => onChange(page - 1)}
         className="flex h-10 w-10 items-center justify-center border border-stone-300 text-stone-700 transition-colors hover:border-stone-900 disabled:cursor-not-allowed disabled:opacity-40"
@@ -299,7 +312,7 @@ function Pagination({
 
       <button
         type="button"
-        aria-label="Next page"
+        aria-label={t("common.next")}
         disabled={page >= totalPages}
         onClick={() => onChange(page + 1)}
         className="flex h-10 w-10 items-center justify-center border border-stone-300 text-stone-700 transition-colors hover:border-stone-900 disabled:cursor-not-allowed disabled:opacity-40"

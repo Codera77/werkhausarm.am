@@ -7,6 +7,8 @@ import { Heart, Minus, Plus, Share2, Truck, RotateCcw, ExternalLink } from "luci
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/components/wishlist/wishlist-provider";
 import type { Product } from "@/lib/data";
+import { localizeProduct, tColor } from "@/lib/i18n/content";
+import { useI18n } from "@/lib/i18n/provider";
 import { cn, formatAmd } from "@/lib/utils";
 
 type ProductInfoProps = {
@@ -22,6 +24,11 @@ const colorSwatches: Record<string, string> = {
 };
 
 export function ProductInfo({ product }: ProductInfoProps) {
+  const { t, locale } = useI18n();
+  const localized = useMemo(
+    () => localizeProduct(product, locale),
+    [product, locale]
+  );
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(product.colors?.[0] ?? "White");
   const { isWishlisted, toggle } = useWishlist();
@@ -40,25 +47,25 @@ export function ProductInfo({ product }: ProductInfoProps) {
     <div className="flex flex-col">
       <nav className="mb-4 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-stone-400">
         <Link href="/" className="hover:text-stone-800">
-          Home
+          {t("common.homeCrumb")}
         </Link>
         <span>/</span>
         <Link href="/products" className="hover:text-stone-800">
-          Products
+          {t("nav.products")}
         </Link>
         <span>/</span>
-        <span className="text-stone-700">{product.name}</span>
+        <span className="text-stone-700">{localized.name}</span>
       </nav>
 
       <h1 className="font-serif text-4xl text-stone-900 md:text-5xl">
-        {product.name}
+        {localized.name}
       </h1>
-      <p className="mt-2 text-sm text-stone-500">No reviews</p>
+      <p className="mt-2 text-sm text-stone-500">{t("product.noReviews")}</p>
 
       <div className="mt-5 flex flex-wrap items-end gap-3">
         {product.compareAtPrice ? (
           <span className="text-lg text-stone-400 line-through">
-            {formatAmd(product.compareAtPrice)}
+            {formatAmd(product.compareAtPrice, locale)}
           </span>
         ) : null}
         <span
@@ -67,20 +74,21 @@ export function ProductInfo({ product }: ProductInfoProps) {
             product.compareAtPrice ? "text-[#c45c4a]" : "text-stone-900"
           )}
         >
-          {formatAmd(product.price)}
+          {formatAmd(product.price, locale)}
         </span>
         {savePercent ? (
           <span className="bg-[#c45c4a] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-            Save {savePercent}%
+            {t("product.save", { n: savePercent })}
           </span>
         ) : null}
       </div>
-      <p className="mt-1 text-xs text-stone-400">Tax included</p>
+      <p className="mt-1 text-xs text-stone-400">{t("product.taxIncluded")}</p>
 
       {product.colors?.length ? (
         <div className="mt-8">
           <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-stone-500">
-            Color: <span className="text-stone-800">{color}</span>
+            {t("product.color")}:{" "}
+            <span className="text-stone-800">{tColor(locale, color)}</span>
           </p>
           <div className="flex flex-wrap gap-2">
             {product.colors.map((swatch) => (
@@ -88,7 +96,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                 key={swatch}
                 type="button"
                 onClick={() => setColor(swatch)}
-                aria-label={swatch}
+                aria-label={tColor(locale, swatch)}
                 className={cn(
                   "h-8 w-8 rounded-full border-2 transition-transform",
                   color === swatch
@@ -106,7 +114,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
         <div className="inline-flex h-12 items-center border border-stone-300">
           <button
             type="button"
-            aria-label="Decrease quantity"
+            aria-label={t("common.previous")}
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             className="flex h-full w-11 items-center justify-center text-stone-600 hover:bg-stone-100"
           >
@@ -115,7 +123,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           <span className="min-w-10 text-center text-sm">{quantity}</span>
           <button
             type="button"
-            aria-label="Increase quantity"
+            aria-label={t("common.next")}
             onClick={() => setQuantity((q) => q + 1)}
             className="flex h-full w-11 items-center justify-center text-stone-600 hover:bg-stone-100"
           >
@@ -124,12 +132,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </div>
 
         <Button className="h-12 flex-1 rounded-none bg-stone-900 px-8 text-[11px] uppercase tracking-[0.18em] hover:bg-stone-800 sm:flex-none sm:min-w-[200px]">
-          Add to Cart
+          {t("product.addToCart")}
         </Button>
 
         <button
           type="button"
-          aria-label="Wishlist"
+          aria-label={t("common.wishlist")}
           onClick={() => toggle(product.id)}
           className="flex h-12 w-12 items-center justify-center border border-stone-300 text-stone-700 transition-colors hover:border-stone-900"
         >
@@ -164,34 +172,32 @@ export function ProductInfo({ product }: ProductInfoProps) {
       <div className="mt-8 space-y-3 border-t border-stone-200 pt-6 text-sm text-stone-600">
         <p className="flex gap-3">
           <Truck className="mt-0.5 h-4 w-4 shrink-0" />
-          <span>
-            Estimate delivery times: <strong>12–26 days</strong> (International),{" "}
-            <strong>3–6 days</strong> (Armenia).
-          </span>
+          <span>{t("product.deliveryIntl")}</span>
+        </p>
+        <p className="flex gap-3">
+          <Truck className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{t("product.deliveryLocal")}</span>
         </p>
         <p className="flex gap-3">
           <RotateCcw className="mt-0.5 h-4 w-4 shrink-0" />
-          <span>
-            Return within <strong>45 days</strong> of purchase. Duties & taxes
-            are non-refundable.
-          </span>
+          <span>{t("product.returns")}</span>
         </p>
       </div>
 
       <dl className="mt-6 grid gap-2 text-sm text-stone-600">
         {product.brand ? (
           <div className="flex gap-2">
-            <dt className="text-stone-400">Brand:</dt>
+            <dt className="text-stone-400">{t("product.brand")}:</dt>
             <dd>{product.brand}</dd>
           </div>
         ) : null}
         <div className="flex gap-2">
-          <dt className="text-stone-400">Category:</dt>
-          <dd>{product.category}</dd>
+          <dt className="text-stone-400">{t("product.category")}:</dt>
+          <dd>{localized.category}</dd>
         </div>
         {product.tags?.length ? (
           <div className="flex gap-2">
-            <dt className="text-stone-400">Tags:</dt>
+            <dt className="text-stone-400">{t("product.tags")}:</dt>
             <dd>{product.tags.join(", ")}</dd>
           </div>
         ) : null}

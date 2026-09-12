@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 
 import { catalogProducts } from "@/lib/data";
+import { localizeProduct } from "@/lib/i18n/content";
+import { useI18n } from "@/lib/i18n/provider";
 import { formatAmd } from "@/lib/utils";
 
 type SearchOverlayProps = {
@@ -15,6 +17,7 @@ type SearchOverlayProps = {
 };
 
 export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
+  const { t, locale } = useI18n();
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,10 +42,15 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
     };
   }, [open, onClose]);
 
+  const localizedCatalog = useMemo(
+    () => catalogProducts.map((product) => localizeProduct(product, locale)),
+    [locale]
+  );
+
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return catalogProducts.slice(0, 6);
-    return catalogProducts
+    if (!q) return localizedCatalog.slice(0, 6);
+    return localizedCatalog
       .filter(
         (product) =>
           product.name.toLowerCase().includes(q) ||
@@ -50,7 +58,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
           product.brand?.toLowerCase().includes(q)
       )
       .slice(0, 8);
-  }, [query]);
+  }, [query, localizedCatalog]);
 
   return (
     <AnimatePresence>
@@ -64,7 +72,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
         >
           <button
             type="button"
-            aria-label="Close search"
+            aria-label={t("common.close")}
             className="absolute inset-0 bg-stone-950/45 backdrop-blur-sm"
             onClick={onClose}
           />
@@ -72,7 +80,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="Search"
+            aria-label={t("common.search")}
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -87,13 +95,13 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search furniture, collections, brands…"
+                  placeholder={t("search.placeholder")}
                   className="h-11 w-full bg-transparent text-base text-stone-900 outline-none placeholder:text-stone-400 md:text-lg"
                 />
                 <button
                   type="button"
                   onClick={onClose}
-                  aria-label="Close"
+                  aria-label={t("common.close")}
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-stone-200/70 hover:text-stone-900"
                 >
                   <X className="h-4 w-4" />
@@ -102,12 +110,12 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
 
               <div className="max-h-[min(60vh,420px)] overflow-y-auto p-3 md:p-4">
                 <p className="mb-3 px-2 text-[11px] font-medium uppercase tracking-[0.18em] text-stone-400">
-                  {query.trim() ? "Results" : "Popular pieces"}
+                  {query.trim() ? t("search.results") : t("search.popular")}
                 </p>
 
                 {results.length === 0 ? (
                   <p className="px-2 py-10 text-center text-sm text-stone-500">
-                    No matches for “{query.trim()}”
+                    {t("search.noMatches", { query: query.trim() })}
                   </p>
                 ) : (
                   <ul className="space-y-1">
@@ -146,7 +154,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                             </p>
                           </div>
                           <p className="shrink-0 text-sm text-stone-700">
-                            {formatAmd(product.price)}
+                            {formatAmd(product.price, locale)}
                           </p>
                         </Link>
                       </motion.li>
@@ -160,7 +168,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                     onClick={onClose}
                     className="inline-flex text-[11px] uppercase tracking-[0.16em] text-stone-600 transition-colors hover:text-stone-900"
                   >
-                    View all products
+                    {t("search.viewAllProducts")}
                   </Link>
                 </div>
               </div>

@@ -5,26 +5,29 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n/provider";
 
 type FeatureBannerProps = {
-  eyebrow?: string;
-  title: string;
-  body: string;
-  cta: string;
+  eyebrowKey?: string;
+  titleKey: string;
+  bodyKey: string;
+  ctaKey: string;
   image: string;
   imageAlt: string;
   reverse?: boolean;
 };
 
 export function FeatureBanner({
-  eyebrow,
-  title,
-  body,
-  cta,
+  eyebrowKey,
+  titleKey,
+  bodyKey,
+  ctaKey,
   image,
   imageAlt,
   reverse = false,
 }: FeatureBannerProps) {
+  const { t } = useI18n();
+
   return (
     <section className="px-6 py-8 md:px-12 lg:px-16">
       <motion.div
@@ -46,23 +49,23 @@ export function FeatureBanner({
             reverse ? "md:order-1" : ""
           }`}
         >
-          {eyebrow ? (
+          {eyebrowKey ? (
             <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.22em] text-stone-400">
-              {eyebrow}
+              {t(eyebrowKey)}
             </p>
           ) : null}
           <h3 className="font-serif text-3xl leading-tight text-stone-900 md:text-4xl">
-            {title}
+            {t(titleKey)}
           </h3>
           <p className="mt-5 max-w-md text-[15px] leading-7 text-stone-600">
-            {body}
+            {t(bodyKey)}
           </p>
           <Button
             asChild
             variant="outline"
             className="mt-8 w-fit rounded-none border-stone-900 px-7 text-[11px] uppercase tracking-[0.18em]"
           >
-            <Link href="#shop">{cta}</Link>
+            <Link href="#shop">{t(ctaKey)}</Link>
           </Button>
         </div>
       </motion.div>

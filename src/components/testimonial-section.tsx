@@ -2,7 +2,11 @@
 
 import { motion } from "framer-motion";
 
+import { useI18n } from "@/lib/i18n/provider";
+
 export function TestimonialSection() {
+  const { t } = useI18n();
+
   return (
     <section className="border-y border-stone-200/80 bg-white px-6 py-20 md:px-12 md:py-24">
       <motion.div
@@ -13,12 +17,10 @@ export function TestimonialSection() {
         className="mx-auto max-w-3xl text-center"
       >
         <p className="font-serif text-2xl leading-relaxed text-stone-700 md:text-3xl">
-          &ldquo;Luma Home transformed our living room into a calm, collected
-          space. Soft wood tones, quiet details, and furniture that feels
-          made for everyday life.&rdquo;
+          &ldquo;{t("home.testimonialQuote")}&rdquo;
         </p>
         <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.22em] text-stone-400">
-          Ann Smith — Photographer
+          {t("home.testimonialAuthor")}
         </p>
       </motion.div>
     </section>

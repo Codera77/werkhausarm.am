@@ -5,8 +5,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n/provider";
 
 export function CraftedBanner() {
+  const { t } = useI18n();
+
   return (
     <section className="relative mx-auto max-w-[1440px] px-6 py-8 md:px-12 lg:px-16">
       <motion.div
@@ -18,7 +21,7 @@ export function CraftedBanner() {
       >
         <Image
           src="/abra/b7.jpg"
-          alt="Bright architectural living room with curved sofa"
+          alt={t("home.craftedTitle")}
           fill
           className="object-cover"
           sizes="100vw"
@@ -27,17 +30,16 @@ export function CraftedBanner() {
         <div className="absolute inset-y-0 right-0 flex w-full items-center justify-end p-6 sm:p-10 md:w-[48%] md:p-14">
           <div className="w-full bg-white/95 p-8 shadow-lg backdrop-blur-sm md:p-10">
             <h3 className="font-serif text-3xl leading-tight text-stone-900 md:text-4xl">
-              Crafted Just For You
+              {t("home.craftedTitle")}
             </h3>
             <p className="mt-4 text-[15px] leading-7 text-stone-600">
-              We understand that you want the perfect furniture for you and your
-              home, and that is why we offer customized order service.
+              {t("home.craftedBody")}
             </p>
             <Button
               asChild
               className="mt-7 rounded-none bg-stone-900 px-7 text-[11px] uppercase tracking-[0.18em] hover:bg-stone-800"
             >
-              <Link href="#shop">Discover More</Link>
+              <Link href="#shop">{t("common.discoverMore")}</Link>
             </Button>
           </div>
         </div>

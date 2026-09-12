@@ -23,6 +23,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { categories, type Category } from "@/lib/data";
+import { tCategory, tSubcategory } from "@/lib/i18n/content";
+import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
 const iconMap = {
@@ -85,12 +87,15 @@ function CategoryList({
   onHoverCategory: (id: string) => void;
   onLeaveCategory: () => void;
 }) {
+  const { t, locale } = useI18n();
+
   return (
     <TooltipProvider delayDuration={80}>
       <ul className="flex flex-1 flex-col justify-center gap-1 px-2.5 py-3">
         {categories.map((category, index) => {
           const Icon = iconMap[category.icon];
           const isActive = activeCategory === category.id;
+          const label = tCategory(locale, category.label);
 
           const row = (
             <Link
@@ -131,10 +136,12 @@ function CategoryList({
                   >
                     <span className="min-w-0">
                       <span className="block truncate text-[13px] font-medium tracking-wide text-white">
-                        {category.label}
+                        {label}
                       </span>
                       <span className="mt-0.5 block truncate text-[10px] uppercase tracking-[0.16em] text-white/45">
-                        {category.subcategories.length} items
+                        {t("sidebar.itemsCount", {
+                          n: category.subcategories.length,
+                        })}
                       </span>
                     </span>
                     <ChevronRight
@@ -175,7 +182,7 @@ function CategoryList({
                     sideOffset={12}
                     className="border-none bg-stone-950 px-3 py-1.5 text-xs tracking-wide text-white"
                   >
-                    {category.label}
+                    {label}
                   </TooltipContent>
                 </Tooltip>
               )}
@@ -194,6 +201,8 @@ function CategoryList({
 }
 
 function SubcategoryFlyout({ category }: { category: Category }) {
+  const { t, locale } = useI18n();
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -12, scale: 0.98 }}
@@ -205,10 +214,10 @@ function SubcategoryFlyout({ category }: { category: Category }) {
       <div className="w-64 overflow-hidden rounded-2xl border border-white/10 bg-stone-950/95 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
         <div className="border-b border-white/10 px-4 py-3.5">
           <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/45">
-            Browse
+            {t("sidebar.browse")}
           </p>
           <p className="mt-0.5 font-serif text-xl text-white">
-            {category.label}
+            {tCategory(locale, category.label)}
           </p>
         </div>
         <ul className="p-2">
@@ -223,7 +232,7 @@ function SubcategoryFlyout({ category }: { category: Category }) {
                 href="/products"
                 className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-white/70 transition-colors duration-300 hover:bg-white/10 hover:text-white"
               >
-                {sub.label}
+                {tSubcategory(locale, sub.label)}
                 <ChevronRight className="h-3.5 w-3.5 text-white/30" />
               </Link>
             </motion.li>
@@ -234,7 +243,7 @@ function SubcategoryFlyout({ category }: { category: Category }) {
             href="/products"
             className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2.5 text-[11px] uppercase tracking-[0.16em] text-stone-900 transition-colors hover:bg-stone-100"
           >
-            View all
+            {t("sidebar.viewAll")}
             <ChevronRight className="h-3.5 w-3.5" />
           </Link>
         </div>
@@ -250,6 +259,8 @@ function MobileCategoriesDrawer({
   open: boolean;
   onClose: () => void;
 }) {
+  const { t, locale } = useI18n();
+
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
@@ -270,7 +281,7 @@ function MobileCategoriesDrawer({
         <div className="fixed inset-0 z-[70] xl:hidden">
           <motion.button
             type="button"
-            aria-label="Close categories"
+            aria-label={t("common.close")}
             className="absolute inset-0 bg-stone-950/50 backdrop-blur-[6px]"
             variants={backdrop}
             initial="hidden"
@@ -283,7 +294,7 @@ function MobileCategoriesDrawer({
           <motion.aside
             role="dialog"
             aria-modal="true"
-            aria-label="Browse categories"
+            aria-label={t("sidebar.browseCategories")}
             variants={panel}
             initial="hidden"
             animate="visible"
@@ -293,15 +304,15 @@ function MobileCategoriesDrawer({
             <div className="flex items-start justify-between border-b border-stone-200/80 px-6 py-6">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400">
-                  Catalog
+                  {t("sidebar.catalog")}
                 </p>
                 <h2 className="mt-1 font-serif text-3xl text-stone-900">
-                  Categories
+                  {t("sidebar.categories")}
                 </h2>
               </div>
               <button
                 type="button"
-                aria-label="Close"
+                aria-label={t("common.close")}
                 onClick={onClose}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-stone-100 text-stone-700 transition-colors hover:bg-stone-900 hover:text-white"
               >
@@ -331,7 +342,7 @@ function MobileCategoriesDrawer({
                       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-stone-100">
                         <Icon className="h-4 w-4" strokeWidth={1.5} />
                       </span>
-                      {category.label}
+                      {tCategory(locale, category.label)}
                     </Link>
                     <ul className="space-y-0.5 border-t border-stone-100 px-3 py-2">
                       {category.subcategories.map((sub) => (
@@ -341,7 +352,7 @@ function MobileCategoriesDrawer({
                             onClick={onClose}
                             className="block rounded-lg px-3 py-2 text-sm text-stone-500 transition-colors hover:bg-stone-50 hover:text-stone-900"
                           >
-                            {sub.label}
+                            {tSubcategory(locale, sub.label)}
                           </Link>
                         </li>
                       ))}
@@ -357,7 +368,7 @@ function MobileCategoriesDrawer({
                 onClick={onClose}
                 className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-stone-900 text-[11px] uppercase tracking-[0.16em] text-white transition-colors hover:bg-stone-800"
               >
-                Shop all
+                {t("sidebar.shopAll")}
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -369,6 +380,7 @@ function MobileCategoriesDrawer({
 }
 
 export function CategoriesSidebar() {
+  const { t } = useI18n();
   const [expanded, setExpanded] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -401,10 +413,10 @@ export function CategoriesSidebar() {
                   className="min-w-0"
                 >
                   <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-white/45">
-                    Catalog
+                    {t("sidebar.catalog")}
                   </p>
                   <p className="truncate font-serif text-lg leading-tight text-white">
-                    Categories
+                    {t("sidebar.categories")}
                   </p>
                 </motion.div>
               )}
@@ -431,7 +443,7 @@ export function CategoriesSidebar() {
               {expanded ? (
                 <>
                   <span className="text-[11px] uppercase tracking-[0.16em]">
-                    Shop all
+                    {t("sidebar.shopAll")}
                   </span>
                   <ChevronRight className="h-3.5 w-3.5" />
                 </>
@@ -447,7 +459,7 @@ export function CategoriesSidebar() {
         <Button
           size="icon"
           className="h-14 w-14 rounded-2xl bg-stone-900 shadow-xl"
-          aria-label="Browse categories"
+          aria-label={t("sidebar.browseCategories")}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen(true)}
         >

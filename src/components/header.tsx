@@ -59,7 +59,7 @@ export function Header() {
         )}
       >
         <div className="mx-auto flex h-[4.25rem] max-w-[1440px] items-center justify-between gap-4 px-4 md:px-8">
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex flex-1 items-center gap-1 lg:gap-2">
             <Button
               variant="ghost"
               size="icon"
@@ -67,7 +67,7 @@ export function Header() {
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((open) => !open)}
               className={cn(
-                "relative hover:bg-white/10",
+                "relative hover:bg-white/10 lg:hidden",
                 scrolled
                   ? "text-stone-900 hover:bg-stone-200/60"
                   : "text-white"
@@ -99,24 +99,26 @@ export function Header() {
                 )}
               </AnimatePresence>
             </Button>
-          </div>
 
-          <nav className="hidden flex-1 items-center gap-1 lg:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "inline-flex h-9 items-center rounded-md px-3 text-[12px] uppercase tracking-[0.16em] transition-colors",
-                  scrolled
-                    ? "text-stone-800 hover:bg-stone-200/50"
-                    : "text-white hover:bg-white/10"
-                )}
-              >
-                {t(navKeyByHref[link.href] ?? link.label)}
-              </Link>
-            ))}
-          </nav>
+            <LanguageSwitcher scrolled={scrolled} variant="icons" />
+
+            <nav className="ml-2 hidden items-center gap-1 lg:flex">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "inline-flex h-9 items-center rounded-md px-3 text-[12px] uppercase tracking-[0.16em] transition-colors",
+                    scrolled
+                      ? "text-stone-800 hover:bg-stone-200/50"
+                      : "text-white hover:bg-white/10"
+                  )}
+                >
+                  {t(navKeyByHref[link.href] ?? link.label)}
+                </Link>
+              ))}
+            </nav>
+          </div>
 
           <SiteLogo
             priority
@@ -125,8 +127,6 @@ export function Header() {
           />
 
           <div className="flex flex-1 items-center justify-end gap-0.5 md:gap-1">
-            <LanguageSwitcher scrolled={scrolled} />
-
             <Button
               variant="ghost"
               size="icon"

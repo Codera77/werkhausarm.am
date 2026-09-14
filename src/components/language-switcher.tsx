@@ -25,16 +25,65 @@ type LanguageSwitcherProps = {
   scrolled?: boolean;
   className?: string;
   compact?: boolean;
+  /** Inline flag icons (no dropdown) */
+  variant?: "dropdown" | "icons";
 };
 
 export function LanguageSwitcher({
   scrolled = true,
   className,
   compact = false,
+  variant = "dropdown",
 }: LanguageSwitcherProps) {
   const { locale, setLocale } = useI18n();
   const current = localeMeta[locale];
   const Flag = flags[current.flag];
+
+  if (variant === "icons") {
+    return (
+      <div
+        role="group"
+        aria-label="Language"
+        className={cn("flex items-center gap-1", className)}
+      >
+        {locales.map((code: Locale) => {
+          const meta = localeMeta[code];
+          const ItemFlag = flags[meta.flag];
+          const active = locale === code;
+          return (
+            <button
+              key={code}
+              type="button"
+              aria-label={meta.label}
+              aria-pressed={active}
+              onClick={() => setLocale(code)}
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-full transition-all",
+                scrolled
+                  ? "hover:bg-stone-200/60"
+                  : "hover:bg-white/10",
+                active
+                  ? scrolled
+                    ? "bg-stone-200/80 ring-1 ring-stone-900/15"
+                    : "bg-white/15 ring-1 ring-white/30"
+                  : "opacity-70 hover:opacity-100"
+              )}
+            >
+              <span
+                className={cn(
+                  "overflow-hidden rounded-[3px] shadow-sm ring-1",
+                  scrolled ? "ring-black/10" : "ring-white/25",
+                  active && "scale-105"
+                )}
+              >
+                <ItemFlag className="h-3.5 w-[21px]" />
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <DropdownMenu>
@@ -62,7 +111,7 @@ export function LanguageSwitcher({
           ) : null}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[11rem] p-1">
+      <DropdownMenuContent align="start" className="min-w-[11rem] p-1">
         {locales.map((code: Locale) => {
           const meta = localeMeta[code];
           const ItemFlag = flags[meta.flag];

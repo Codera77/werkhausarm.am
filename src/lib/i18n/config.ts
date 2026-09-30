@@ -8,8 +8,8 @@ export const localeMeta: Record<
   { label: string; short: string; flag: "am" | "ru" | "gb" }
 > = {
   en: { label: "English", short: "EN", flag: "gb" },
-  ru: { label: "Русский", short: "RU", flag: "ru" },
-  hy: { label: "Հայերեն", short: "HY", flag: "am" },
+  ru: { label: "Русский", short: "Ру", flag: "ru" },
+  hy: { label: "Հայերեն", short: "Հայ", flag: "am" },
 };
 
 export const STORAGE_KEY = "dizart-locale";

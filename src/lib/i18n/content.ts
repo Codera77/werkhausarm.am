@@ -117,6 +117,21 @@ export function localizeProduct(product: Product, locale: Locale): Product {
   const name = getMessage(dictionaries[locale], `${base}.name`);
   const description = getMessage(dictionaries[locale], `${base}.description`);
   const category = getMessage(dictionaries[locale], `${base}.category`);
+  const longDescription = getMessage(
+    dictionaries[locale],
+    `${base}.longDescription`
+  );
+
+  const featureKeys = [
+    "product.features.suitable",
+    "product.features.retail",
+    "product.features.guidance",
+    "product.features.delivery",
+    "product.features.support",
+  ] as const;
+
+  const features = featureKeys.map((key) => getMessage(dictionaries[locale], key));
+  const hasTranslatedFeatures = features.every((item, index) => item !== featureKeys[index]);
 
   return {
     ...product,
@@ -124,7 +139,11 @@ export function localizeProduct(product: Product, locale: Locale): Product {
     description:
       description === `${base}.description` ? product.description : description,
     category: category === `${base}.category` ? product.category : category,
-    imageAlt:
-      name === `${base}.name` ? product.imageAlt : name,
+    longDescription:
+      longDescription === `${base}.longDescription`
+        ? product.longDescription
+        : longDescription,
+    features: hasTranslatedFeatures ? features : product.features,
+    imageAlt: name === `${base}.name` ? product.imageAlt : name,
   };
 }

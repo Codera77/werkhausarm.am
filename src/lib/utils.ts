@@ -7,12 +7,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const numberLocales: Record<Locale, string> = {
-  en: "en-US",
-  ru: "ru-RU",
-  hy: "hy-AM",
+const groupSeparators: Record<Locale, string> = {
+  en: ",",
+  ru: "\u00A0",
+  hy: "\u00A0",
 };
 
+/** Deterministic price formatting — avoids SSR/client Intl mismatches. */
 export function formatAmd(amount: number, locale: Locale = "en"): string {
-  return `${amount.toLocaleString(numberLocales[locale])} AMD`;
+  const absolute = Math.round(Math.abs(amount));
+  const digits = String(absolute);
+  const separator = groupSeparators[locale] ?? ",";
+  const grouped = digits.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+  const signed = amount < 0 ? `-${grouped}` : grouped;
+  return `${signed} AMD`;
 }

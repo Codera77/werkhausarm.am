@@ -247,83 +247,134 @@ const en = {
     "tonus-wall-panel": {
       name: "Tonus Wall Panel",
       description: "Modern wall acoustic panel system for residential quiet",
-      category: "Wall Acoustics"
+      category: "Wall Acoustics",
+      longDescription: "Tonus wall panels deliver layered acoustic performance for apartments and homes. Designed for clean installation and lasting comfort without visual noise. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "tonus-ceiling": {
       name: "Tonus Ceiling System",
       description: "Ceiling acoustic assembly for rooms with overhead noise",
-      category: "Ceiling Acoustics"
+      category: "Ceiling Acoustics",
+      longDescription: "Tonus ceiling system reduces overhead noise with a modern acoustic assembly for living and working spaces. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "idealdom-floor": {
       name: "IdealDom Floor System",
       description: "Floor sound insulation for impact and structure-borne noise",
-      category: "Floor Acoustics"
+      category: "Floor Acoustics",
+      longDescription: "IdealDom floor system targets impact and structure-borne noise for quieter apartments and houses. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "idealdom-wall": {
       name: "IdealDom Wall System",
       description: "Complete wall insulation stack for apartments and offices",
-      category: "Sound Insulation"
+      category: "Sound Insulation",
+      longDescription: "IdealDom wall system is a complete insulation stack for apartments and offices that need reliable sound control. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "idealdom-partition": {
       name: "IdealDom Partition",
       description: "Acoustic partition solution for offices and commercial rooms",
-      category: "Interior Finishing"
+      category: "Interior Finishing",
+      longDescription: "IdealDom acoustic partitions help organize quieter offices and commercial rooms without heavy reconstruction. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "membrane-pro": {
       name: "Acoustic Membrane Pro",
       description: "High-density sound membrane for multi-layer assemblies",
-      category: "Accessories"
+      category: "Accessories",
+      longDescription: "High-density Acoustic Membrane Pro strengthens multi-layer sound insulation assemblies in walls, floors, and ceilings. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "mineral-wool": {
       name: "Acoustic Mineral Wool",
       description: "Dense mineral wool for professional sound insulation layers",
-      category: "Construction Systems"
+      category: "Construction Systems",
+      longDescription: "Dense mineral wool for professional sound insulation layers. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "drywall-acoustic": {
       name: "Acoustic Drywall Board",
       description: "Specialized board for quieter wall and ceiling builds",
-      category: "Construction Systems"
+      category: "Construction Systems",
+      longDescription: "Specialized acoustic drywall board for quieter wall and ceiling builds in residential and commercial projects. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "sealant-kit": {
       name: "Acoustic Sealant Kit",
       description: "Sealing kit for junctions, sockets, and frame edges",
-      category: "Accessories"
+      category: "Accessories",
+      longDescription: "Acoustic sealant kit for junctions, sockets, and frame edges — critical details that preserve system performance. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "frame-profile": {
       name: "Metal Frame Profiles",
       description: "Profiles for framed acoustic and partition assemblies",
-      category: "Construction Systems"
+      category: "Construction Systems",
+      longDescription: "Metal frame profiles for framed acoustic and partition assemblies used in modern construction systems. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "design-finish-panel": {
       name: "Design Finish Panel",
       description: "Premium interior finish panels paired with acoustic stacks",
-      category: "Design Solutions"
+      category: "Design Solutions",
+      longDescription: "Premium design finish panels that pair with acoustic stacks for interiors where comfort and appearance matter together. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "commercial-system": {
       name: "Commercial Acoustic Pack",
       description: "Turnkey acoustic package for offices and retail interiors",
-      category: "Commercial Spaces"
+      category: "Commercial Spaces",
+      longDescription: "Turnkey commercial acoustic package for offices and retail interiors that need clear, professional sound control. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "residential-kit": {
       name: "Residential Quiet Kit",
       description: "Ready kit for apartment bedrooms and living rooms",
-      category: "Residential"
+      category: "Residential",
+      longDescription: "Ready residential quiet kit for apartment bedrooms and living rooms — practical layers for everyday comfort. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "office-liner": {
       name: "Office Acoustic Liner",
       description: "Absorptive liner panels for open-plan and meeting rooms",
-      category: "Commercial Spaces"
+      category: "Commercial Spaces",
+      longDescription: "Absorptive office liner panels for open-plan spaces and meeting rooms that need less echo and clearer speech. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "home-envelope": {
       name: "Home Envelope System",
       description: "Whole-home insulation approach for private houses",
-      category: "Residential"
+      category: "Residential",
+      longDescription: "Whole-home envelope insulation approach for private houses seeking quieter rooms and better comfort. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     },
     "coming-soon-pack": {
       name: "IdealDom · Coming Soon",
       description: "Full IdealDom range arriving soon across Armenia",
-      category: "Coming Soon"
+      category: "Coming Soon",
+      longDescription: "The full IdealDom range is coming soon across Armenia. Follow DizArt for assortment, pricing, and application details. Selected for professional use in Armenia — retail and wholesale, with guidance on correct application.",
     }
+  },
+  product: {
+    noReviews: "No reviews",
+    save: "Save {n}%",
+    taxIncluded: "Tax included",
+    color: "Color",
+    addToCart: "Add to cart",
+    deliveryIntl: "Delivery across Armenia",
+    deliveryLocal: "Retail and wholesale available",
+    returns: "Expert consultation on system selection",
+    brand: "Brand",
+    category: "Category",
+    tags: "Tags",
+    hoverZoom: "Hover to zoom",
+    alsoLike: "You may also like",
+    quickView: "Quick view",
+    description: "Description",
+    shippingReturn: "Delivery & consultation",
+    reviews: "Reviews",
+    outstanding: "Key advantages",
+    supreme: "Professional application",
+    infoBody: "Selected for apartments, houses, offices, and commercial spaces. We help you choose the right acoustic and construction system for lasting comfort.",
+    infoProduct: "About this product",
+    shippingBody1: "Delivery is available across the Republic of Armenia. Retail and wholesale options are offered for projects of any scale.",
+    shippingBody2: "Need help choosing layers or installation approach? Contact DizArt for a professional consultation before ordering.",
+    customerReviews: "Customer reviews",
+    firstReview: "Be the first to leave a review for this product.",
+    writeReview: "Write a review",
+    features: {
+      suitable: "Suitable for apartments, houses, offices, and commercial spaces",
+      retail: "Retail and wholesale availability in Armenia",
+      guidance: "Professional guidance on correct system layers",
+      delivery: "Delivery across the Republic of Armenia",
+      support: "Dedicated support for selection and application"
+    },
   },
   categories: {
     livingRoom: "Sound Insulation",
@@ -632,83 +683,134 @@ const ru = {
     "tonus-wall-panel": {
       name: "Панель Tonus для стен",
       description: "Современная стеновая акустическая система для жилых помещений",
-      category: "Акустика стен"
+      category: "Акустика стен",
+      longDescription: "Стеновые панели Tonus обеспечивают многослойную акустическую защиту для квартир и домов. Рассчитаны на аккуратный монтаж и долговечный комфорт без визуального шума. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "tonus-ceiling": {
       name: "Потолочная система Tonus",
       description: "Потолочная акустическая сборка от шума сверху",
-      category: "Акустика потолка"
+      category: "Акустика потолка",
+      longDescription: "Потолочная система Tonus снижает шум сверху благодаря современной акустической сборке для жилых и рабочих помещений. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "idealdom-floor": {
       name: "Система IdealDom для пола",
       description: "Звукоизоляция пола от ударного и структурного шума",
-      category: "Акустика пола"
+      category: "Акустика пола",
+      longDescription: "Система IdealDom для пола снижает ударный и структурный шум в квартирах и домах. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "idealdom-wall": {
       name: "Стеновая система IdealDom",
       description: "Полный стеновой пакет для квартир и офисов",
-      category: "Звукоизоляция"
+      category: "Звукоизоляция",
+      longDescription: "Стеновая система IdealDom — полный пакет изоляции для квартир и офисов, где нужна надёжная защита от шума. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "idealdom-partition": {
       name: "Перегородка IdealDom",
       description: "Акустическая перегородка для офисов и коммерции",
-      category: "Внутренняя отделка"
+      category: "Внутренняя отделка",
+      longDescription: "Акустические перегородки IdealDom помогают организовать более тихие офисы и коммерческие помещения без тяжёлой реконструкции. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "membrane-pro": {
       name: "Акустическая мембрана Pro",
       description: "Плотная звукоизоляционная мембрана для многослойных систем",
-      category: "Аксессуары"
+      category: "Аксессуары",
+      longDescription: "Плотная акустическая мембрана Pro усиливает многослойные системы звукоизоляции стен, полов и потолков. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "mineral-wool": {
       name: "Акустическая минвата",
       description: "Плотная минвата для профессиональных слоёв звукоизоляции",
-      category: "Строительные системы"
+      category: "Строительные системы",
+      longDescription: "Плотная минеральная вата для профессиональных слоёв звукоизоляции. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "drywall-acoustic": {
       name: "Акустический гипсокартон",
       description: "Специализированный лист для тихих стен и потолков",
-      category: "Строительные системы"
+      category: "Строительные системы",
+      longDescription: "Специализированный акустический гипсокартон для более тихих стен и потолков в жилых и коммерческих проектах. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "sealant-kit": {
       name: "Набор акустического герметика",
       description: "Герметизация узлов, розеток и краёв каркаса",
-      category: "Аксессуары"
+      category: "Аксессуары",
+      longDescription: "Набор акустического герметика для узлов, розеток и краёв каркаса — важные детали, которые сохраняют эффективность системы. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "frame-profile": {
       name: "Металлические профили",
       description: "Профили для каркасных акустических и перегородочных систем",
-      category: "Строительные системы"
+      category: "Строительные системы",
+      longDescription: "Металлические профили для каркасных акустических и перегородочных систем в современном строительстве. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "design-finish-panel": {
       name: "Дизайн-панель отделки",
       description: "Премиальные панели отделки в паре с акустическими слоями",
-      category: "Дизайн-решения"
+      category: "Дизайн-решения",
+      longDescription: "Премиальные дизайн-панели отделки в паре с акустическими слоями — для интерьеров, где важны и комфорт, и внешний вид. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "commercial-system": {
       name: "Коммерческий акустический пакет",
       description: "Готовый акустический пакет для офисов и ритейла",
-      category: "Коммерческие пространства"
+      category: "Коммерческие пространства",
+      longDescription: "Готовый коммерческий акустический пакет для офисов и ритейла, где нужен понятный профессиональный контроль шума. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "residential-kit": {
       name: "Жилой комплект «Тишина»",
       description: "Готовый комплект для спален и гостиных",
-      category: "Жилые пространства"
+      category: "Жилые пространства",
+      longDescription: "Готовый жилой комплект для спален и гостиных — практичные слои для повседневного комфорта. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "office-liner": {
       name: "Офисный акустический лайнер",
       description: "Поглощающие панели для открытых офисов и переговорных",
-      category: "Коммерческие пространства"
+      category: "Коммерческие пространства",
+      longDescription: "Поглощающие офисные панели для open-space и переговорных — меньше эха и более разборчивая речь. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "home-envelope": {
       name: "Система изоляции дома",
       description: "Комплексная изоляция для частных домов",
-      category: "Жилые пространства"
+      category: "Жилые пространства",
+      longDescription: "Комплексный подход к изоляции частного дома — для более тихих комнат и большего комфорта. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     },
     "coming-soon-pack": {
       name: "IdealDom · Скоро",
       description: "Полный ассортимент IdealDom скоро в Армении",
-      category: "Скоро в продаже"
+      category: "Скоро в продаже",
+      longDescription: "Полный ассортимент IdealDom скоро появится по всей Армении. Следите за DizArt — скоро представим ассортимент, цены и детали применения. Для профессионального применения в Армении — розница и опт, с консультацией по правильному применению.",
     }
+  },
+  product: {
+    noReviews: "Нет отзывов",
+    save: "Скидка {n}%",
+    taxIncluded: "С учётом налогов",
+    color: "Цвет",
+    addToCart: "В корзину",
+    deliveryIntl: "Доставка по всей Армении",
+    deliveryLocal: "Розница и опт",
+    returns: "Экспертная консультация по подбору системы",
+    brand: "Бренд",
+    category: "Категория",
+    tags: "Теги",
+    hoverZoom: "Наведите, чтобы увеличить",
+    alsoLike: "Вам также может понравиться",
+    quickView: "Быстрый просмотр",
+    description: "Описание",
+    shippingReturn: "Доставка и консультация",
+    reviews: "Отзывы",
+    outstanding: "Ключевые преимущества",
+    supreme: "Профессиональное применение",
+    infoBody: "Подобрано для квартир, домов, офисов и коммерческих помещений. Мы помогаем выбрать правильную систему звукоизоляции и строительства для долговечного комфорта.",
+    infoProduct: "Об этом товаре",
+    shippingBody1: "Доставка доступна по всей территории Республики Армения. Предлагаем розницу и опт для проектов любого масштаба.",
+    shippingBody2: "Нужна помощь с выбором слоёв или способа монтажа? Свяжитесь с DizArt для профессиональной консультации перед заказом.",
+    customerReviews: "Отзывы покупателей",
+    firstReview: "Оставьте первый отзыв об этом товаре.",
+    writeReview: "Написать отзыв",
+    features: {
+      suitable: "Подходит для квартир, домов, офисов и коммерческих помещений",
+      retail: "Розница и опт в Армении",
+      guidance: "Профессиональная консультация по правильным слоям системы",
+      delivery: "Доставка по всей территории Армении",
+      support: "Поддержка при выборе и применении"
+    },
   },
   categories: {
     livingRoom: "Звукоизоляция",
@@ -1017,83 +1119,134 @@ const hy = {
     "tonus-wall-panel": {
       name: "Tonus պատի պանել",
       description: "Ժամանակակից պատի ձայնամեկուսիչ համակարգ բնակելի տարածքների համար",
-      category: "Պատի ակուստիկա"
+      category: "Պատի ակուստիկա",
+      longDescription: "Tonus պատի պանելները ապահովում են շերտավոր ակուստիկ արդյունավետություն բնակարանների և տների համար։ Նախատեսված են մաքուր տեղադրման և երկարատև հարմարավետության համար՝ առանց տեսողական աղմուկի։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "tonus-ceiling": {
       name: "Tonus առաստաղի համակարգ",
       description: "Առաստաղի ակուստիկ համակարգ վերևից եկող աղմուկի դեմ",
-      category: "Առաստաղի ակուստիկա"
+      category: "Առաստաղի ակուստիկա",
+      longDescription: "Tonus առաստաղի համակարգը նվազեցնում է վերևից եկող աղմուկը ժամանակակից ակուստիկ հավաքածուով՝ բնակելի և աշխատանքային տարածքների համար։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "idealdom-floor": {
       name: "IdealDom հատակի համակարգ",
       description: "Հատակի ձայնամեկուսացում հարվածային և կառուցվածքային աղմուկից",
-      category: "Հատակի ակուստիկա"
+      category: "Հատակի ակուստիկա",
+      longDescription: "IdealDom հատակի համակարգը նվազեցնում է հարվածային և կառուցվածքային աղմուկը՝ ավելի հանգիստ բնակարանների և տների համար։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "idealdom-wall": {
       name: "IdealDom պատի համակարգ",
       description: "Ամբողջական պատի փաթեթ բնակարանների և գրասենյակների համար",
-      category: "Ձայնամեկուսացում"
+      category: "Ձայնամեկուսացում",
+      longDescription: "IdealDom պատի համակարգը ամբողջական մեկուսացման փաթեթ է բնակարանների և գրասենյակների համար, որտեղ անհրաժեշտ է հուսալի ձայնամեկուսացում։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "idealdom-partition": {
       name: "IdealDom միջնորմ",
       description: "Ակուստիկ միջնորմ գրասենյակների և կոմերցիոն տարածքների համար",
-      category: "Ներքին հարդարում"
+      category: "Ներքին հարդարում",
+      longDescription: "IdealDom ակուստիկ միջնորմները օգնում են կազմակերպել ավելի հանգիստ գրասենյակներ և կոմերցիոն սենյակներ՝ առանց ծանր վերակառուցման։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "membrane-pro": {
       name: "Ակուստիկ մեմբրան Pro",
       description: "Բարձր խտության ձայնամեկուսիչ մեմբրան բազմաշերտ համակարգերի համար",
-      category: "Աքսեսուարներ"
+      category: "Աքսեսուարներ",
+      longDescription: "Acoustic Membrane Pro բարձր խտության մեմբրանը ուժեղացնում է պատերի, հատակի և առաստաղի բազմաշերտ ձայնամեկուսիչ համակարգերը։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "mineral-wool": {
       name: "Ակուստիկ հանքային բամբակ",
       description: "Խիտ հանքային բամբակ պրոֆեսիոնալ ձայնամեկուսիչ շերտերի համար",
-      category: "Շինարարական համակարգեր"
+      category: "Շինարարական համակարգեր",
+      longDescription: "Խիտ հանքային բամբակ պրոֆեսիոնալ ձայնամեկուսիչ շերտերի համար։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "drywall-acoustic": {
       name: "Ակուստիկ գիպսաստվարաթուղթ",
       description: "Հատուկ թիթեղ ավելի հանգիստ պատերի և առաստաղների համար",
-      category: "Շինարարական համակարգեր"
+      category: "Շինարարական համակարգեր",
+      longDescription: "Հատուկ ակուստիկ գիպսաստվարաթուղթ ավելի հանգիստ պատերի և առաստաղների համար՝ բնակելի և կոմերցիոն նախագծերում։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "sealant-kit": {
       name: "Ակուստիկ հերմետիկի հավաքածու",
       description: "Հանգույցների, վարդակների և շրջանակի եզրերի հերմետիկացում",
-      category: "Աքսեսուարներ"
+      category: "Աքսեսուարներ",
+      longDescription: "Ակուստիկ հերմետիկի հավաքածու հանգույցների, վարդակների և շրջանակի եզրերի համար՝ կարևոր մանրամասներ, որոնք պահպանում են համակարգի արդյունավետությունը։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "frame-profile": {
       name: "Մետաղական պրոֆիլներ",
       description: "Պրոֆիլներ շրջանակային ակուստիկ և միջնորմային համակարգերի համար",
-      category: "Շինարարական համակարգեր"
+      category: "Շինարարական համակարգեր",
+      longDescription: "Մետաղական պրոֆիլներ շրջանակային ակուստիկ և միջնորմային համակարգերի համար՝ ժամանակակից շինարարական լուծումներում։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "design-finish-panel": {
       name: "Դիզայնային հարդարման պանել",
       description: "Պրեմիում հարդարման պանելներ ակուստիկ շերտերի հետ",
-      category: "Դիզայնի լուծումներ"
+      category: "Դիզայնի լուծումներ",
+      longDescription: "Պրեմիում դիզայնային հարդարման պանելներ ակուստիկ շերտերի հետ՝ ինտերիերների համար, որտեղ կարևոր են և՛ հարմարավետությունը, և՛ տեսքը։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "commercial-system": {
       name: "Կոմերցիոն ակուստիկ փաթեթ",
       description: "Պատրաստի ակուստիկ փաթեթ գրասենյակների և խանութների համար",
-      category: "Կոմերցիոն տարածքներ"
+      category: "Կոմերցիոն տարածքներ",
+      longDescription: "Պատրաստի կոմերցիոն ակուստիկ փաթեթ գրասենյակների և խանութների համար, որտեղ անհրաժեշտ է պրոֆեսիոնալ ձայնամեկուսացում։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "residential-kit": {
       name: "Բնակելի «Լռություն» հավաքածու",
       description: "Պատրաստի հավաքածու ննջասենյակների և հյուրասենյակների համար",
-      category: "Բնակելի"
+      category: "Բնակելի",
+      longDescription: "Պատրաստի բնակելի հավաքածու ննջասենյակների և հյուրասենյակների համար՝ գործնական շերտեր առօրյա հարմարավետության համար։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "office-liner": {
       name: "Գրասենյակային ակուստիկ լայներ",
       description: "Կլանող պանելներ բաց գրասենյակների և հանդիպումների սենյակների համար",
-      category: "Կոմերցիոն տարածքներ"
+      category: "Կոմերցիոն տարածքներ",
+      longDescription: "Կլանող գրասենյակային պանելներ բաց տարածքների և հանդիպումների սենյակների համար՝ ավելի քիչ արձագանք և ավելի պարզ խոսք։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "home-envelope": {
       name: "Տան մեկուսացման համակարգ",
       description: "Ամբողջ տան մեկուսացման մոտեցում մասնավոր տների համար",
-      category: "Բնակելի"
+      category: "Բնակելի",
+      longDescription: "Ամբողջ տան մեկուսացման մոտեցում մասնավոր տների համար՝ ավելի հանգիստ սենյակների և ավելի բարձր հարմարավետության համար։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     },
     "coming-soon-pack": {
       name: "IdealDom · Շուտով",
       description: "IdealDom-ի ամբողջ տեսականին շուտով Հայաստանում",
-      category: "Շուտով"
+      category: "Շուտով",
+      longDescription: "IdealDom-ի ամբողջ տեսականին շուտով կհայտնվի ամբողջ Հայաստանում։ Հետևեք DizArt-ին՝ տեսականու, գների և կիրառման մանրամասների համար։ Հայաստանում պրոֆեսիոնալ կիրառման համար՝ մանրածախ և մեծածախ, ճիշտ կիրառման խորհրդատվությամբ։",
     }
+  },
+  product: {
+    noReviews: "Կարծիքներ չկան",
+    save: "Խնայել {n}%",
+    taxIncluded: "Հարկերով",
+    color: "Գույն",
+    addToCart: "Ավելացնել զամբյուղին",
+    deliveryIntl: "Առաքում ամբողջ Հայաստանում",
+    deliveryLocal: "Մանրածախ և մեծածախ վաճառք",
+    returns: "Փորձագիտական խորհրդատվություն համակարգի ընտրության համար",
+    brand: "Բրենդ",
+    category: "Կատեգորիա",
+    tags: "Պիտակներ",
+    hoverZoom: "Մոտեցնելու համար մկնիկը պահեք վրան",
+    alsoLike: "Ձեզ կարող է դուր գալ նաև",
+    quickView: "Արագ դիտում",
+    description: "Նկարագրություն",
+    shippingReturn: "Առաքում և խորհրդատվություն",
+    reviews: "Կարծիքներ",
+    outstanding: "Հիմնական առավելություններ",
+    supreme: "Պրոֆեսիոնալ կիրառում",
+    infoBody: "Ընտրված է բնակարանների, տների, գրասենյակների և կոմերցիոն տարածքների համար։ Մենք օգնում ենք ընտրել ճիշտ ձայնամեկուսացման և շինարարական համակարգ՝ երկարատև հարմարավետության համար։",
+    infoProduct: "Այս ապրանքի մասին",
+    shippingBody1: "Առաքումը հասանելի է Հայաստանի Հանրապետության ողջ տարածքում։ Առաջարկում ենք մանրածախ և մեծածախ վաճառք ցանկացած մասշտաբի նախագծերի համար։",
+    shippingBody2: "Օգնությո՞ւն է պետք շերտերի կամ տեղադրման ընտրության հարցում։ Պատվիրելուց առաջ կապվեք DizArt-ի հետ՝ պրոֆեսիոնալ խորհրդատվության համար։",
+    customerReviews: "Գնորդների կարծիքներ",
+    firstReview: "Եղեք առաջինը, ով կթողնի կարծիք այս ապրանքի մասին։",
+    writeReview: "Գրել կարծիք",
+    features: {
+      suitable: "Հարմար է բնակարանների, տների, գրասենյակների և կոմերցիոն տարածքների համար",
+      retail: "Մանրածախ և մեծածախ առկայություն Հայաստանում",
+      guidance: "Պրոֆեսիոնալ խորհրդատվություն համակարգի ճիշտ շերտերի վերաբերյալ",
+      delivery: "Առաքում Հայաստանի Հանրապետության ողջ տարածքում",
+      support: "Աջակցություն ընտրության և կիրառման հարցում"
+    },
   },
   categories: {
     livingRoom: "Ձայնամեկուսացում",

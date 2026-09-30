@@ -95,7 +95,7 @@ export function LanguageSwitcher({
           size="sm"
           aria-label="Language"
           className={cn(
-            "gap-1.5 rounded-full px-2 text-[11px] uppercase tracking-[0.12em]",
+            "gap-1.5 rounded-full px-2 text-[11px] tracking-[0.08em]",
             scrolled
               ? "text-stone-700 hover:bg-stone-200/50"
               : "text-white hover:bg-white/10",

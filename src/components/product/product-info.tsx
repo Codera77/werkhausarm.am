@@ -17,10 +17,12 @@ type ProductInfoProps = {
 
 const colorSwatches: Record<string, string> = {
   White: "#f5f5f4",
+  Grey: "#a8a29e",
   Beige: "#d6d3d1",
   Green: "#7d8b74",
   Black: "#1c1917",
   Oak: "#b08968",
+  Natural: "#c4a484",
 };
 
 export function ProductInfo({ product }: ProductInfoProps) {

@@ -66,13 +66,13 @@ export function ProductTabs({ product }: ProductTabsProps) {
             <div className="grid gap-10 md:grid-cols-2">
               <div>
                 <p className="text-[15px] leading-7 text-stone-600">
-                  {product.longDescription ?? localized.description}
+                  {localized.longDescription ?? localized.description}
                 </p>
                 <h3 className="mt-8 font-serif text-2xl text-stone-900">
                   {t("product.outstanding")}
                 </h3>
                 <ul className="mt-4 space-y-2 text-sm text-stone-600">
-                  {product.features?.map((feature) => (
+                  {localized.features?.map((feature) => (
                     <li key={feature} className="flex gap-2">
                       <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-stone-800" />
                       {feature}

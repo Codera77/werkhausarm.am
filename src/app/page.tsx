@@ -1,5 +1,6 @@
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
+import { NewsSection } from "@/components/news-section";
 import { QuoteSection } from "@/components/quote-section";
 import { FeatureBanner } from "@/components/feature-banner";
 import { CollectionsSection } from "@/components/collections-section";
@@ -16,13 +17,14 @@ export default function Home() {
       <CategoriesSidebar />
       <main className="flex-1">
         <HeroSection />
+        <NewsSection />
         <QuoteSection />
         <FeatureBanner
           titleKey="home.qualityTitle"
           bodyKey="home.qualityBody"
           ctaKey="common.learnMore"
-          image="/abra/ba3-1.jpg"
-          imageAlt="Sage green accent chair beside a sculptural stone table"
+          image="/dizart/banner-quality.jpg"
+          imageAlt="Modern office and construction systems interior"
         />
         <CollectionsSection />
         <FeatureBanner
@@ -31,8 +33,8 @@ export default function Home() {
           titleKey="home.responsibleTitle"
           bodyKey="home.responsibleBody"
           ctaKey="common.discoverMore"
-          image="/abra/ba3-2.jpg"
-          imageAlt="Warm brown sofa in a sunlit living room"
+          image="/dizart/banner-systems.jpg"
+          imageAlt="Building systems and professional construction"
         />
         <CraftedBanner />
         <FeaturedProducts />

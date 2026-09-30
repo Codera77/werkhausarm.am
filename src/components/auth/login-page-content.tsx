@@ -30,7 +30,7 @@ export function LoginPageContent() {
   };
 
   return (
-    <div className="relative flex min-h-dvh bg-[#f4f1ed]">
+    <div className="relative flex min-h-dvh bg-[#f2f1ef]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(180,160,140,0.18),transparent_50%),radial-gradient(ellipse_at_100%_100%,rgba(28,25,23,0.06),transparent_45%)]"
@@ -44,8 +44,8 @@ export function LoginPageContent() {
           className="relative hidden min-h-dvh overflow-hidden lg:block"
         >
           <Image
-            src="/abra/home1.jpg"
-            alt="Werkhaus interior"
+            src="/dizart/hero/hero-1.jpg"
+            alt="DizArt construction and design"
             fill
             priority
             className="object-cover"
@@ -70,7 +70,7 @@ export function LoginPageContent() {
                 {t("login.memberAccess")}
               </p>
               <h1 className="mt-4 font-serif text-5xl leading-[1.05] text-white xl:text-6xl">
-                Werkhaus
+                DizArt
               </h1>
               <p className="mt-5 text-[15px] leading-relaxed text-white/75">
                 {t("login.pitch")}
@@ -288,7 +288,7 @@ export function LoginPageContent() {
           </div>
 
           <p className="pt-4 text-center text-[11px] uppercase tracking-[0.14em] text-stone-400 lg:text-left">
-            © {new Date().getFullYear()} Werkhaus
+            © {new Date().getFullYear()} DizArt
           </p>
         </section>
       </div>

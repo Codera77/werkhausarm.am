@@ -9,10 +9,10 @@ import { collections } from "@/lib/data";
 import { useI18n } from "@/lib/i18n/provider";
 
 const collectionNameKeys: Record<string, string> = {
-  "sofa-living": "collections.sofaLiving",
-  "chic-residence": "collections.chicResidence",
-  "dreamy-decor": "collections.dreamyDecor",
-  "fine-furnish": "collections.fineFurnish",
+  "tonus-systems": "collections.sofaLiving",
+  idealdom: "collections.chicResidence",
+  "acoustic-layers": "collections.dreamyDecor",
+  "design-finishes": "collections.fineFurnish",
 };
 
 export function CollectionsSection() {

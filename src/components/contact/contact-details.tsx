@@ -1,9 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Share2,
+} from "lucide-react";
 
-import { contactInfo } from "@/lib/data";
+import { contactInfo, socialLinks } from "@/lib/data";
 import { useI18n } from "@/lib/i18n/provider";
 
 export function ContactMap() {
@@ -29,7 +35,7 @@ export function ContactMap() {
           href={contactInfo.mapLinkUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-4 left-4 bg-white/95 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-stone-800 shadow-md backdrop-blur-sm transition-colors hover:bg-stone-900 hover:text-white"
+          className="absolute bottom-4 left-4 bg-white/95 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-stone-800 shadow-md backdrop-blur-sm transition-colors hover:bg-[#c17a45] hover:text-white"
         >
           {t("contact.openMap")}
         </a>
@@ -58,7 +64,7 @@ export function ContactDetails() {
       content: (
         <a
           href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
-          className="transition-colors hover:text-stone-900"
+          className="transition-colors hover:text-[#c17a45]"
         >
           {contactInfo.phone}
         </a>
@@ -70,7 +76,7 @@ export function ContactDetails() {
       content: (
         <a
           href={`mailto:${contactInfo.email}`}
-          className="transition-colors hover:text-stone-900"
+          className="transition-colors hover:text-[#c17a45]"
         >
           {contactInfo.email}
         </a>
@@ -86,6 +92,10 @@ export function ContactDetails() {
         </>
       ),
     },
+  ] as const;
+
+  const messengers = [
+    { href: socialLinks.facebook, label: "Facebook", icon: Share2 },
   ] as const;
 
   return (
@@ -130,6 +140,29 @@ export function ContactDetails() {
             </motion.div>
           );
         })}
+      </div>
+
+      <div className="mt-10">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-stone-400">
+          {t("footer.follow")}
+        </p>
+        <div className="mt-3 flex gap-2">
+          {messengers.map((item) => {
+            const Icon = item.icon;
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.label}
+                className="flex h-10 w-10 items-center justify-center border border-stone-300 text-stone-700 transition-colors hover:border-[#c17a45] hover:text-[#c17a45]"
+              >
+                <Icon className="h-4 w-4" strokeWidth={1.5} />
+              </a>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

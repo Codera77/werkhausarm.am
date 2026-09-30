@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Sofa,
-  BedDouble,
-  UtensilsCrossed,
+  Volume2,
+  Building2,
+  Layers,
   Briefcase,
-  Lamp,
+  Palette,
   Tag,
   ChevronRight,
   LayoutGrid,
@@ -28,13 +28,13 @@ import { useI18n } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
 const iconMap = {
-  sofa: Sofa,
-  bed: BedDouble,
-  utensils: UtensilsCrossed,
+  volume: Volume2,
+  building: Building2,
+  layers: Layers,
   briefcase: Briefcase,
-  lamp: Lamp,
+  palette: Palette,
   tag: Tag,
-  home: Sofa,
+  home: Building2,
 } as const;
 
 const backdrop = {

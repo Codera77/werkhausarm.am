@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { LoginPageContent } from "@/components/auth/login-page-content";
 
 export const metadata: Metadata = {
-  title: "Sign in — werkhausarm",
-  description: "Sign in to your werkhausarm account to save favorites and collections.",
+  title: "Sign in — DizArt",
+  description: "Sign in to your DizArt account to save favorites and collections.",
 };
 
 export default function LoginPage() {

@@ -26,10 +26,10 @@ export async function generateMetadata({
 }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductById(slug);
-  if (!product) return { title: "Product — werkhausarm" };
+  if (!product) return { title: "Product — DizArt" };
 
   return {
-    title: `${product.name} — werkhausarm`,
+    title: `${product.name} — DizArt`,
     description: product.description,
   };
 }
@@ -44,7 +44,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       <Header />
-      <main className="flex-1 bg-[#f4f1ed] pt-24 md:pt-28">
+      <main className="flex-1 bg-[#f2f1ef] pt-24 md:pt-28">
         <div className="mx-auto max-w-[1440px] px-6 pb-20 md:px-12 lg:px-16">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
             <ProductGallery

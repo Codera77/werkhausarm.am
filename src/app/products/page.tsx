@@ -5,9 +5,9 @@ import { SiteFooter } from "@/components/site-footer";
 import { ProductsCatalog } from "@/components/products/products-catalog";
 
 export const metadata: Metadata = {
-  title: "Products — werkhausarm",
+  title: "Products — DizArt",
   description:
-    "Browse the werkhausarm furniture collection in a 4-column grid with filters for category, price, color, tag, and brand.",
+    "Browse DizArt sound insulation and construction systems with filters for category, price, color, tag, and brand.",
 };
 
 export default function ProductsPage() {

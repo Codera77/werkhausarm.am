@@ -9,9 +9,9 @@ import { CommitmentBanner } from "@/components/about/commitment-banner";
 import { PolicyStrip } from "@/components/about/policy-strip";
 
 export const metadata: Metadata = {
-  title: "About Us — werkhausarm",
+  title: "About Us — DizArt",
   description:
-    "Our story, the team behind werkhausarm, and our commitment to thoughtful furniture design.",
+    "Our story, the DizArt team, and our commitment to sound insulation and construction solutions in Armenia.",
 };
 
 export default function AboutPage() {

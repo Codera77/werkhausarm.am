@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f1ed;
-  --foreground: #1a1a1a;
-  --muted: #6b6560;
+  --background: #f2f1ef;
+  --foreground: #17191c;
+  --muted: #6a6e74;
   --card: #ffffff;
-  --border: #e4dfd8;
-  --sale: #c45c4a;
+  --border: #e2e0dc;
+  --sale: #c17a45;
+  --accent: #c17a45;
+  --accent-soft: #d4a574;
+  --graphite: #14181e;
+  --graphite-soft: #2a3038;
 }
 
 @theme inline {
@@ -16,6 +20,10 @@
   --color-card: var(--card);
   --color-border: var(--border);
   --color-sale: var(--sale);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-graphite: var(--graphite);
+  --color-graphite-soft: var(--graphite-soft);
   --font-sans: var(--font-figtree);
   --font-serif: var(--font-cormorant);
 }
@@ -31,17 +39,22 @@ body {
 }
 
 ::selection {
-  background: rgb(26 26 26 / 0.12);
+  background: rgb(193 122 69 / 0.22);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom site scrollbar */
+html.loader-lock,
+html.loader-lock body {
+  overflow: hidden;
+}
+
+/* Custom DizArt scrollbar — graphite + copper */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #a8a29e transparent;
+  scrollbar-color: #c17a45 transparent;
 }
 
 *::-webkit-scrollbar {
@@ -54,14 +67,14 @@ html {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #a8a29e 0%, #78716c 100%);
+  background: linear-gradient(180deg, #c17a45 0%, #8a5a36 100%);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #78716c 0%, #57534e 100%);
+  background: linear-gradient(180deg, #d4a574 0%, #c17a45 100%);
   border: 2px solid transparent;
   background-clip: padding-box;
 }

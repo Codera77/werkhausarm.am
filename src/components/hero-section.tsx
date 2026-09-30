@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -13,12 +14,16 @@ const slideCopyKeys = [
   {
     eyebrow: "hero.slide1Eyebrow",
     title: "hero.slide1Title",
+    sub: "hero.slide1Sub",
     cta: "hero.slide1Cta",
+    href: "/products",
   },
   {
     eyebrow: "hero.slide2Eyebrow",
     title: "hero.slide2Title",
+    sub: "hero.slide2Sub",
     cta: "hero.slide2Cta",
+    href: "/contact",
   },
 ] as const;
 
@@ -34,7 +39,7 @@ export function HeroSection() {
     setIndex((current) => (current === heroSlides.length - 1 ? 0 : current + 1));
 
   return (
-    <section className="relative min-h-[88vh] w-full overflow-hidden bg-stone-900 md:min-h-screen">
+    <section className="relative min-h-[88vh] w-full overflow-hidden bg-graphite md:min-h-screen">
       <AnimatePresence mode="wait">
         <motion.div
           key={slide.id}
@@ -49,10 +54,12 @@ export function HeroSection() {
             alt={slide.imageAlt}
             fill
             priority
+            quality={90}
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-stone-950/35" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d0f12]/80 via-[#0d0f12]/45 to-[#0d0f12]/25" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(193,122,69,0.18),transparent_45%)]" />
         </motion.div>
       </AnimatePresence>
 
@@ -62,21 +69,36 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 }}
-          className="max-w-xl"
+          className="max-w-2xl"
         >
-          <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-white/80">
+          <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-[#d4a574]">
             {t(copy.eyebrow)}
           </p>
           <h1 className="whitespace-pre-line font-serif text-4xl leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
             {t(copy.title)}
           </h1>
-          <Button
-            variant="outline"
-            size="lg"
-            className="mt-8 rounded-none border-white/80 bg-transparent px-8 text-[12px] uppercase tracking-[0.18em] text-white hover:bg-white hover:text-stone-900"
-          >
-            {t(copy.cta)}
-          </Button>
+          <p className="mt-5 max-w-lg text-[15px] leading-7 text-white/75">
+            {t(copy.sub)}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-none bg-[#c17a45] px-8 text-[12px] uppercase tracking-[0.18em] text-white hover:bg-[#a86535]"
+            >
+              <Link href={copy.href}>{t(copy.cta)}</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="rounded-none border-white/70 bg-transparent px-8 text-[12px] uppercase tracking-[0.18em] text-white hover:bg-white hover:text-graphite"
+            >
+              <Link href={index === 0 ? "/contact" : "/products"}>
+                {t(index === 0 ? "hero.slide2Cta" : "hero.slide1Cta")}
+              </Link>
+            </Button>
+          </div>
         </motion.div>
 
         <div className="absolute bottom-8 left-6 flex items-center gap-2 md:left-12 lg:left-16">
@@ -84,7 +106,7 @@ export function HeroSection() {
             type="button"
             onClick={prev}
             aria-label={t("common.previous")}
-            className="flex h-10 w-10 items-center justify-center border border-white/40 text-white transition-colors hover:bg-white hover:text-stone-900"
+            className="flex h-10 w-10 items-center justify-center border border-white/40 text-white transition-colors hover:border-[#c17a45] hover:bg-[#c17a45]"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -92,7 +114,7 @@ export function HeroSection() {
             type="button"
             onClick={next}
             aria-label={t("common.next")}
-            className="flex h-10 w-10 items-center justify-center border border-white/40 text-white transition-colors hover:bg-white hover:text-stone-900"
+            className="flex h-10 w-10 items-center justify-center border border-white/40 text-white transition-colors hover:border-[#c17a45] hover:bg-[#c17a45]"
           >
             <ChevronRight className="h-4 w-4" />
           </button>

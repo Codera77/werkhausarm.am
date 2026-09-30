@@ -27,6 +27,7 @@ type LanguageSwitcherProps = {
   compact?: boolean;
   /** Inline flag icons (no dropdown) */
   variant?: "dropdown" | "icons";
+  align?: "start" | "center" | "end";
 };
 
 export function LanguageSwitcher({
@@ -34,6 +35,7 @@ export function LanguageSwitcher({
   className,
   compact = false,
   variant = "dropdown",
+  align = "end",
 }: LanguageSwitcherProps) {
   const { locale, setLocale } = useI18n();
   const current = localeMeta[locale];
@@ -103,15 +105,11 @@ export function LanguageSwitcher({
           <span className="overflow-hidden rounded-[3px] shadow-sm ring-1 ring-black/10">
             <Flag className="h-3.5 w-[21px]" />
           </span>
-          {!compact ? (
-            <>
-              <span className="hidden sm:inline">{current.short}</span>
-              <ChevronDown className="h-3 w-3 opacity-70" />
-            </>
-          ) : null}
+          <span className="hidden sm:inline">{current.short}</span>
+          <ChevronDown className="h-3 w-3 opacity-70" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="min-w-[11rem] p-1">
+      <DropdownMenuContent align={align} className="min-w-[11rem] p-1">
         {locales.map((code: Locale) => {
           const meta = localeMeta[code];
           const ItemFlag = flags[meta.flag];

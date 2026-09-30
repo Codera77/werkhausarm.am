@@ -4,6 +4,12 @@ import { dictionaries } from "@/lib/i18n/dictionaries";
 import { getMessage } from "@/lib/i18n/utils";
 
 const categoryKeyByLabel: Record<string, string> = {
+  "Sound Insulation": "categories.livingRoom",
+  Construction: "categories.bedroom",
+  "Interior Systems": "categories.dining",
+  "Design Solutions": "categories.office",
+  Accessories: "categories.decor",
+  "Coming Soon": "categories.sale",
   "Living Room": "categories.livingRoom",
   Bedroom: "categories.bedroom",
   Dining: "categories.dining",
@@ -21,9 +27,34 @@ const categoryKeyByLabel: Record<string, string> = {
   "Warm Habitat": "filterCat.warmHabitat",
   "Luxe Interior": "filterCat.luxeInterior",
   "Soft Shelter": "filterCat.softShelter",
+  "Construction Systems": "filterCat.cozyCorner",
+  "Interior Finishing": "filterCat.urbanNest",
+  "Floor Acoustics": "filterCat.naturalForm",
+  "Wall Acoustics": "filterCat.nordicHome",
+  "Ceiling Acoustics": "filterCat.pureComfort",
+  "Commercial Spaces": "filterCat.timelessSpace",
+  Residential: "filterCat.elegantRoom",
 };
 
 const subcategoryKeyByLabel: Record<string, string> = {
+  "Wall Systems": "sub.sofas",
+  "Floor Systems": "sub.coffeeTables",
+  "Ceiling Systems": "sub.accentChairs",
+  Membranes: "sub.tvUnits",
+  Profiles: "sub.beds",
+  Boards: "sub.nightstands",
+  Sealants: "sub.dressers",
+  Kits: "sub.wardrobes",
+  Partitions: "sub.diningTables",
+  "Finishing Panels": "sub.diningChairs",
+  Commercial: "sub.sideboards",
+  Accessories: "sub.barStools",
+  Apartments: "sub.desks",
+  Offices: "sub.officeChairs",
+  Homes: "sub.bookshelves",
+  Showrooms: "sub.storage",
+  IdealDom: "sub.clearance",
+  Tonus: "sub.seasonalOffers",
   Sofas: "sub.sofas",
   "Coffee Tables": "sub.coffeeTables",
   "Accent Chairs": "sub.accentChairs",
@@ -51,9 +82,11 @@ const subcategoryKeyByLabel: Record<string, string> = {
 
 const colorKeyByLabel: Record<string, string> = {
   White: "colors.white",
+  Grey: "colors.green",
   Green: "colors.green",
   Black: "colors.black",
   Beige: "colors.beige",
+  Natural: "colors.oak",
   Oak: "colors.oak",
 };
 

@@ -23,6 +23,33 @@ const navKeyByHref: Record<string, string> = {
   "/contact": "nav.contact",
 };
 
+const leftLinks = navLinks.slice(0, 2);
+const rightLinks = navLinks.slice(2, 4);
+
+function NavLink({
+  href,
+  label,
+  scrolled,
+}: {
+  href: string;
+  label: string;
+  scrolled: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "inline-flex h-8 shrink-0 items-center whitespace-nowrap rounded-md px-1.5 text-[10px] uppercase tracking-[0.1em] transition-colors md:px-2 md:text-[11px] xl:px-2.5 xl:text-[12px] xl:tracking-[0.12em]",
+        scrolled
+          ? "text-stone-800 hover:bg-stone-200/50"
+          : "text-white hover:bg-white/10"
+      )}
+    >
+      {label}
+    </Link>
+  );
+}
+
 export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -48,29 +75,39 @@ export function Header() {
     setMobileOpen(false);
   }, [pathname]);
 
+  const iconBtn = cn(
+    "h-9 w-9 shrink-0",
+    scrolled
+      ? "text-stone-800 hover:bg-stone-200/50"
+      : "text-white hover:bg-white/10"
+  );
+
   return (
     <>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           scrolled
-            ? "border-b border-stone-200/80 bg-[#f4f1ed]/95 text-stone-900 shadow-sm backdrop-blur-md"
+            ? "border-b border-stone-200/80 bg-[#f2f1ef]/95 text-stone-900 shadow-sm backdrop-blur-md"
             : "bg-transparent text-white"
         )}
       >
-        <div className="mx-auto flex h-[4.25rem] max-w-[1440px] items-center justify-between gap-4 px-4 md:px-8">
-          <div className="flex flex-1 items-center gap-1 lg:gap-2">
+        <div className="relative mx-auto flex h-16 max-w-[1440px] items-center justify-between px-3 sm:px-4 md:h-[4.25rem] md:px-6 lg:px-8">
+          {/* Left: mobile menu */}
+          <div className="z-10 flex items-center">
             <Button
               variant="ghost"
               size="icon"
-              aria-label={mobileOpen ? t("common.closeMenu") : t("common.openMenu")}
+              aria-label={
+                mobileOpen ? t("common.closeMenu") : t("common.openMenu")
+              }
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((open) => !open)}
               className={cn(
-                "relative hover:bg-white/10 lg:hidden",
+                "relative shrink-0 lg:hidden",
                 scrolled
                   ? "text-stone-900 hover:bg-stone-200/60"
-                  : "text-white"
+                  : "text-white hover:bg-white/10"
               )}
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -100,43 +137,60 @@ export function Header() {
               </AnimatePresence>
             </Button>
 
-            <LanguageSwitcher scrolled={scrolled} variant="icons" />
-
-            <nav className="ml-2 hidden items-center gap-1 lg:flex">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "inline-flex h-9 items-center rounded-md px-3 text-[12px] uppercase tracking-[0.16em] transition-colors",
-                    scrolled
-                      ? "text-stone-800 hover:bg-stone-200/50"
-                      : "text-white hover:bg-white/10"
-                  )}
-                >
-                  {t(navKeyByHref[link.href] ?? link.label)}
-                </Link>
-              ))}
-            </nav>
+            {/* Spacer so left/right stay balanced on desktop */}
+            <div className="hidden w-[9.5rem] lg:block xl:w-[11rem]" aria-hidden />
           </div>
 
-          <SiteLogo
-            priority
-            className="absolute left-1/2 -translate-x-1/2"
-            imageClassName="h-11 w-11 md:h-12 md:w-12 ring-1 ring-white/20"
-          />
+          {/* Center: mobile logo */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden">
+            <SiteLogo
+              priority
+              imageClassName="h-10 w-10"
+            />
+          </div>
 
-          <div className="flex flex-1 items-center justify-end gap-0.5 md:gap-1">
+          {/* Center: desktop nav tightly around logo */}
+          <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 lg:flex xl:gap-1.5">
+            {leftLinks.map((link) => (
+              <NavLink
+                key={link.href}
+                href={link.href}
+                label={t(navKeyByHref[link.href] ?? link.label)}
+                scrolled={scrolled}
+              />
+            ))}
+
+            <SiteLogo
+              priority
+              className="mx-0.5 xl:mx-1"
+              imageClassName="h-10 w-10 xl:h-12 xl:w-12"
+            />
+
+            {rightLinks.map((link) => (
+              <NavLink
+                key={link.href}
+                href={link.href}
+                label={t(navKeyByHref[link.href] ?? link.label)}
+                scrolled={scrolled}
+              />
+            ))}
+          </nav>
+
+          {/* Right: language + actions */}
+          <div className="z-10 flex items-center justify-end gap-0.5 sm:gap-1">
+            <LanguageSwitcher
+              scrolled={scrolled}
+              variant="dropdown"
+              align="end"
+              className="shrink-0 px-1.5 sm:px-2"
+            />
+
             <Button
               variant="ghost"
               size="icon"
               aria-label={t("common.search")}
               onClick={() => setSearchOpen(true)}
-              className={cn(
-                scrolled
-                  ? "text-stone-800 hover:bg-stone-200/50"
-                  : "text-white hover:bg-white/10"
-              )}
+              className={iconBtn}
             >
               <Search className="h-4 w-4" />
             </Button>
@@ -145,11 +199,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               aria-label={t("common.account")}
-              className={cn(
-                scrolled
-                  ? "text-stone-800 hover:bg-stone-200/50"
-                  : "text-white hover:bg-white/10"
-              )}
+              className={cn(iconBtn, "hidden sm:inline-flex")}
             >
               <Link href="/login">
                 <User className="h-4 w-4" />
@@ -160,17 +210,12 @@ export function Header() {
               variant="ghost"
               size="icon"
               aria-label={t("common.wishlist")}
-              className={cn(
-                "relative",
-                scrolled
-                  ? "text-stone-800 hover:bg-stone-200/50"
-                  : "text-white hover:bg-white/10"
-              )}
+              className={cn("relative", iconBtn)}
             >
               <Link href="/wishlist">
                 <Heart className="h-4 w-4" />
                 {wishlistCount > 0 ? (
-                  <span className="absolute right-1 top-1 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-[#c45c4a] px-1 text-[9px] font-semibold text-white">
+                  <span className="absolute right-1 top-1 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-[#c17a45] px-1 text-[9px] font-semibold text-white">
                     {wishlistCount}
                   </span>
                 ) : null}

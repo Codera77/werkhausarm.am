@@ -17,17 +17,18 @@ export function SiteLogo({
   return (
     <Link
       href="/"
-      aria-label="Werkhaus Home"
+      aria-label="DizArt Home"
       className={cn("inline-flex shrink-0 items-center", className)}
     >
       <Image
-        src="/logowerk.jpg"
-        alt="Werkhaus"
-        width={120}
-        height={120}
+        src="/dizart-logo.png"
+        alt="DizArt"
+        width={160}
+        height={160}
         priority={priority}
+        quality={95}
         className={cn(
-          "h-10 w-10 rounded-full object-cover md:h-12 md:w-12",
+          "h-11 w-11 object-contain md:h-12 md:w-12",
           imageClassName
         )}
       />

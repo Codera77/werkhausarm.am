@@ -16,20 +16,24 @@ const cormorant = Cormorant({
 });
 
 export const metadata: Metadata = {
-  title: "werkhausarm — Modern Living Refined",
+  title: "DizArt — շինարարության և դիզայնի լուծումներ մեկ վայրում",
   description:
-    "Quiet luxury furniture for warm, sophisticated homes. Soft wood tones, charcoal accents, and curated Scandinavian design.",
+    "DizArt.am — modern sound insulation and construction systems in Armenia. IdealDom, Tonus, retail & wholesale, delivery across Armenia.",
   icons: {
-    icon: [{ url: "/logowerk.jpg", type: "image/jpeg" }],
-    shortcut: "/logowerk.jpg",
-    apple: "/logowerk.jpg",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="hy"
       className={`${figtree.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">

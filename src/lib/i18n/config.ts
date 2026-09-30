@@ -1,7 +1,7 @@
 export const locales = ["en", "ru", "hy"] as const;
 export type Locale = (typeof locales)[number];
 
-export const defaultLocale: Locale = "en";
+export const defaultLocale: Locale = "hy";
 
 export const localeMeta: Record<
   Locale,
@@ -12,4 +12,4 @@ export const localeMeta: Record<
   hy: { label: "Հայերեն", short: "HY", flag: "am" },
 };
 
-export const STORAGE_KEY = "werkhaus-locale";
+export const STORAGE_KEY = "dizart-locale";

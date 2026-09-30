@@ -16,6 +16,9 @@ export function ContactForm() {
     event.currentTarget.reset();
   };
 
+  const fieldClass =
+    "h-12 w-full border border-stone-300 bg-white px-4 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-[#c17a45]";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -35,7 +38,17 @@ export function ContactForm() {
             type="text"
             name="name"
             placeholder={t("contact.namePlaceholder")}
-            className="h-12 w-full border border-stone-300 bg-white px-4 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-stone-900"
+            className={fieldClass}
+          />
+        </label>
+        <label className="block">
+          <span className="sr-only">{t("contact.phonePlaceholder")}</span>
+          <input
+            required
+            type="tel"
+            name="phone"
+            placeholder={t("contact.phonePlaceholder")}
+            className={fieldClass}
           />
         </label>
         <label className="block">
@@ -45,8 +58,26 @@ export function ContactForm() {
             type="email"
             name="email"
             placeholder={t("contact.emailPlaceholder")}
-            className="h-12 w-full border border-stone-300 bg-white px-4 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-stone-900"
+            className={fieldClass}
           />
+        </label>
+        <label className="block">
+          <span className="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.16em] text-stone-500">
+            {t("contact.serviceLabel")}
+          </span>
+          <select
+            required
+            name="service"
+            defaultValue=""
+            className={`${fieldClass} appearance-none`}
+          >
+            <option value="" disabled>
+              {t("contact.serviceLabel")}
+            </option>
+            <option value="sound">{t("contact.serviceSound")}</option>
+            <option value="build">{t("contact.serviceBuild")}</option>
+            <option value="other">{t("contact.serviceOther")}</option>
+          </select>
         </label>
         <label className="block">
           <span className="sr-only">{t("contact.messagePlaceholder")}</span>
@@ -55,13 +86,13 @@ export function ContactForm() {
             name="message"
             rows={6}
             placeholder={t("contact.messagePlaceholder")}
-            className="w-full resize-y border border-stone-300 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-stone-900"
+            className="w-full resize-y border border-stone-300 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition-colors placeholder:text-stone-400 focus:border-[#c17a45]"
           />
         </label>
 
         <Button
           type="submit"
-          className="h-12 rounded-none bg-stone-900 px-10 text-[11px] uppercase tracking-[0.18em] hover:bg-stone-800"
+          className="h-12 rounded-none bg-[#c17a45] px-10 text-[11px] uppercase tracking-[0.18em] hover:bg-[#a86535]"
         >
           {t("contact.submit")}
         </Button>

@@ -62,7 +62,8 @@ export function PageLoader() {
                 alt="DizArt"
                 fill
                 priority
-                sizes="144px"
+                quality={100}
+                sizes="160px"
                 className="object-contain"
               />
             </div>

@@ -163,7 +163,7 @@ export function Header() {
             <SiteLogo
               priority
               className="mx-0.5 xl:mx-1"
-              imageClassName="h-10 w-10 xl:h-12 xl:w-12"
+              imageClassName="h-11 w-11 xl:h-14 xl:w-14"
             />
 
             {rightLinks.map((link) => (
